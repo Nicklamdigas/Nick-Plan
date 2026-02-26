@@ -34,3 +34,17 @@ print("Tuple:", my_tuple_var) #Tuple: (7,5,8)
 my_range_var = range(5)
 print('Range:', my_range_var)#Range: range(0,5)
 
+#list: An ordered collection of elemenets that supports different data types.
+my_list = [22,"Hello World!", 3.14, True]
+print(my_list)# [22, "hello world", 3.14,True]
+
+#None: A special value that represents the absence of a value.
+my_none_var = None
+print("None:", my_none_var) #None: None
+
+#To get the data type of a variable, you can use th type() function
+my_var_1 = "Hello world"
+my_var_2 = 21
+
+print(type(my_var_1)) #<class 'str'>
+print(type(my_var_2)) #<class 'int'>

@@ -1,0 +1,1119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nick's Life OS v5.1</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Inter', sans-serif; background-color: #f8fafc; color: #0f172a; }
+        .mono { font-family: 'JetBrains Mono', monospace; }
+        ::-webkit-scrollbar { width: 8px; height: 8px; }
+        ::-webkit-scrollbar-track { background: #f1f5f9; }
+        ::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 4px; }
+        ::-webkit-scrollbar-thumb:hover { background: #94a3b8; }
+        .grid-line { border-top: 1px dashed #e2e8f0; width: 100%; }
+        .time-label { display: flex; align-items: flex-start; justify-content: flex-end; padding-right: 8px; padding-top: 2px; }
+        .session-item {
+            position: absolute; width: 96%; left: 2%;
+            border-radius: 6px; padding: 4px 8px; font-size: 0.75rem;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1); overflow: hidden;
+            cursor: pointer; transition: transform 0.1s, box-shadow 0.1s; z-index: 10;
+        }
+        .session-item:hover { transform: scale(1.02); box-shadow: 0 4px 6px rgba(0,0,0,0.15); z-index: 20; }
+        .type-Routine  { background-color: #f1f5f9; border-left: 4px solid #64748b; color: #475569; }
+        .type-Class    { background-color: #dbeafe; border-left: 4px solid #2563eb; color: #1e40af; }
+        .type-Study    { background-color: #dcfce7; border-left: 4px solid #16a34a; color: #166534; }
+        .type-Venture  { background-color: #f3e8ff; border-left: 4px solid #9333ea; color: #6b21a8; }
+        .type-Workout  { background-color: #fee2e2; border-left: 4px solid #dc2626; color: #991b1b; }
+        .type-Fun      { background-color: #ffedd5; border-left: 4px solid #ea580c; color: #9a3412; }
+        .type-Commute  { background-color: #ffedd5; border-left: 4px solid #d97706; color: #92400e; }
+        .nav-tab { padding: 5px 14px; font-size: 0.8rem; font-weight: 600; border-radius: 7px; cursor: pointer; transition: all 0.15s; }
+        .nav-tab.active { background: #0f172a; color: white; }
+        .nav-tab:not(.active) { color: #64748b; }
+        .nav-tab:not(.active):hover { background: #f1f5f9; }
+        .mode-btn { padding: 3px 12px; font-size: 0.72rem; font-weight: 600; border-radius: 6px; cursor: pointer; transition: all 0.15s; }
+        .mode-btn.active { background: #0284c7; color: white; }
+        .mode-btn:not(.active) { background: white; color: #64748b; border: 1px solid #e2e8f0; }
+        .mode-btn:not(.active):hover { background: #f8fafc; }
+        .week-badge { background: #0f172a; color: white; font-family: 'JetBrains Mono', monospace; font-size: 0.68rem; padding: 2px 8px; border-radius: 4px; white-space: nowrap; }
+        .phase-card { background: white; border-radius: 12px; border: 1px solid #e2e8f0; overflow: hidden; }
+        .topic-item { padding: 9px 16px; border-bottom: 1px solid #f8fafc; display: flex; align-items: flex-start; gap: 10px; }
+        .topic-item:last-child { border-bottom: none; }
+        .check-box { width: 17px; height: 17px; border-radius: 4px; border: 2px solid #cbd5e1; flex-shrink: 0; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: all 0.15s; margin-top: 2px; }
+        .check-box.done { background: #16a34a; border-color: #16a34a; }
+        .check-box.done::after { content: 'checkmark'; color: white; font-size: 10px; font-weight: bold; }
+        .prog-track { background: #e2e8f0; border-radius: 99px; height: 5px; }
+        .prog-fill  { border-radius: 99px; height: 5px; transition: width 0.3s; }
+        .view { display: none; flex-direction: column; flex: 1; overflow: hidden; }
+        .view.active { display: flex; }
+        #roadmap-view.active { overflow-y: auto; }
+        .modal-overlay { background-color: rgba(0,0,0,0.45); backdrop-filter: blur(2px); }
+        /* === v5.1 NEW STYLES === */
+        .habit-cell { width: 28px; height: 28px; border-radius: 6px; border: 2px solid #e2e8f0; cursor: pointer; display: flex; align-items: center; justify-content: center; font-size: 11px; font-weight: bold; transition: all 0.15s; margin: 0 auto; }
+        .habit-cell.done { background: #16a34a; border-color: #16a34a; color: white; }
+        .habit-cell.today-col { border-color: #0284c7; }
+        .habit-cell.today-col:not(.done) { background: #f0f9ff; }
+        .habit-cell:hover:not(.done) { border-color: #94a3b8; background: #f8fafc; }
+        .phase-hdr { cursor: pointer; user-select: none; transition: opacity 0.1s; }
+        .phase-hdr:hover { opacity: 0.88; }
+        .now-pill  { background: #f0fdf4; border: 1px solid #86efac; color: #166534; }
+        .next-pill { background: #f0f9ff; border: 1px solid #bae6fd; color: #0c4a6e; }
+        .done-pill { background: #f8fafc; border: 1px solid #e2e8f0; color: #64748b; }
+        .streak-badge { background: linear-gradient(135deg, #f97316, #ef4444); color: white; font-family: 'JetBrains Mono', monospace; padding: 2px 10px; border-radius: 99px; font-size: 0.75rem; font-weight: 700; }
+        .quicklink { padding: 5px 12px; background: white; border: 1px solid #e2e8f0; border-radius: 8px; font-size: 0.72rem; font-weight: 500; color: #475569; text-decoration: none; transition: all 0.15s; box-shadow: 0 1px 2px rgba(0,0,0,0.04); }
+        .quicklink:hover { border-color: #0284c7; color: #0284c7; }
+    </style>
+</head>
+<body class="h-screen flex flex-col overflow-hidden">
+
+<!-- HEADER -->
+<header class="bg-white border-b border-slate-200 h-14 flex-shrink-0 flex items-center justify-between px-5 shadow-sm z-30">
+    <div class="flex items-center gap-3">
+        <h1 class="text-base font-bold mono text-slate-900 tracking-tight">Life OS v5.1</h1>
+        <div class="h-5 w-px bg-slate-200"></div>
+        <div id="clock-display" class="text-base font-bold mono text-slate-800">00:00 AM</div>
+    </div>
+    <div class="flex items-center gap-2">
+        <span id="header-streak" class="streak-badge hidden">0 days</span>
+        <div class="flex items-center gap-1 bg-slate-100 p-1 rounded-lg">
+            <button class="nav-tab active" id="tab-schedule" onclick="switchView('schedule')">Schedule</button>
+            <button class="nav-tab"        id="tab-roadmap"  onclick="switchView('roadmap')">Roadmap</button>
+        </div>
+        <button onclick="openModal()"  class="px-3 py-1.5 bg-sky-600 hover:bg-sky-700 text-white text-xs font-semibold rounded-lg shadow transition-colors">+ Add</button>
+        <button onclick="resetData()"  class="px-2 py-1.5 text-slate-400 hover:text-red-500 text-xs font-medium">Reset</button>
+    </div>
+</header>
+
+<!-- SCHEDULE VIEW -->
+<div id="schedule-view" class="view active">
+
+    <!-- MODE + WEEK BANNER -->
+    <div class="bg-white border-b border-slate-200 px-5 py-2 flex items-center gap-4 z-20 flex-shrink-0">
+        <div class="flex items-center gap-2 flex-shrink-0">
+            <span class="text-[10px] font-bold text-slate-400 uppercase tracking-widest">Mode</span>
+            <div class="flex bg-slate-100 rounded-lg p-0.5 gap-0.5">
+                <button class="mode-btn active" id="mode-break"  onclick="switchMode('break')">Break</button>
+                <button class="mode-btn"        id="mode-school" onclick="switchMode('school')">School</button>
+            </div>
+        </div>
+        <div class="flex-1 flex items-center gap-2 min-w-0">
+            <span class="week-badge flex-shrink-0" id="week-badge">Week 1</span>
+            <div class="min-w-0">
+                <p class="text-xs font-bold text-slate-700 truncate leading-tight" id="focus-title">Loading...</p>
+                <p class="text-[10px] text-slate-400 truncate leading-tight"       id="focus-detail">...</p>
+            </div>
+        </div>
+        <div class="flex items-center gap-1.5 flex-shrink-0">
+            <button onclick="changeWeek(-1)" class="w-6 h-6 rounded bg-slate-100 hover:bg-slate-200 text-slate-600 text-xs font-bold flex items-center justify-center">&#8249;</button>
+            <span class="text-[10px] mono text-slate-500 w-10 text-center" id="week-counter">1 / 12</span>
+            <button onclick="changeWeek(1)"  class="w-6 h-6 rounded bg-slate-100 hover:bg-slate-200 text-slate-600 text-xs font-bold flex items-center justify-center">&#8250;</button>
+        </div>
+    </div>
+
+    <!-- TODAY FOCUS BAR -->
+    <div id="today-focus-bar" class="bg-white border-b border-slate-100 px-4 py-2 flex items-center gap-2 flex-wrap z-20 flex-shrink-0 hidden">
+    </div>
+
+    <!-- FILTER BAR -->
+    <div id="filter-bar" class="bg-slate-50 border-b border-slate-200 py-1.5 px-4 flex flex-wrap gap-1.5 items-center z-20 flex-shrink-0">
+        <span class="text-[10px] font-bold text-slate-400 uppercase tracking-widest mr-1">Filters</span>
+    </div>
+
+    <!-- GRID -->
+    <div class="flex-1 overflow-auto bg-white" id="schedule-container">
+        <div class="relative pb-20">
+            <div class="sticky top-0 z-20 flex border-b border-slate-200 bg-slate-50 shadow-sm">
+                <div class="w-14 flex-shrink-0 bg-slate-50 border-r border-slate-200"></div>
+                <div id="day-headers" class="flex flex-1"></div>
+            </div>
+            <div class="flex relative">
+                <div class="w-14 flex-shrink-0 border-r border-slate-200 bg-slate-50 text-[10px] text-slate-400 text-right pr-1.5 select-none sticky left-0 z-10" id="time-labels"></div>
+                <div class="flex-1 relative" id="main-grid">
+                    <div id="grid-background" class="absolute inset-0 w-full pointer-events-none z-0"></div>
+                    <div id="sessions-layer" class="absolute inset-0 w-full h-full z-10 flex">
+                        <div class="day-col flex-1 relative border-r border-slate-100" data-day="Monday"></div>
+                        <div class="day-col flex-1 relative border-r border-slate-100" data-day="Tuesday"></div>
+                        <div class="day-col flex-1 relative border-r border-slate-100" data-day="Wednesday"></div>
+                        <div class="day-col flex-1 relative border-r border-slate-100" data-day="Thursday"></div>
+                        <div class="day-col flex-1 relative border-r border-slate-100" data-day="Friday"></div>
+                        <div class="day-col flex-1 relative border-r border-slate-100" data-day="Saturday"></div>
+                        <div class="day-col flex-1 relative" data-day="Sunday"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div><!-- end schedule-view -->
+
+<!-- ROADMAP VIEW -->
+<div id="roadmap-view" class="view bg-slate-50 p-5">
+    <div class="max-w-3xl mx-auto w-full">
+
+        <!-- Header -->
+        <div class="flex items-start justify-between mb-4">
+            <div>
+                <h2 class="text-xl font-bold text-slate-900">12-Week Roadmap</h2>
+                <p class="text-xs text-slate-500 mt-0.5">Full-Stack Python + Automation &middot; Break: Feb to May 2026</p>
+            </div>
+            <div class="text-right ml-4 flex-shrink-0">
+                <div class="text-2xl font-bold mono text-slate-900" id="overall-pct">0%</div>
+                <div class="text-[10px] text-slate-400">overall</div>
+                <div class="prog-track w-24 mt-1.5"><div class="prog-fill bg-emerald-500" id="overall-bar" style="width:0%"></div></div>
+            </div>
+        </div>
+
+        <!-- Quick links -->
+        <div class="flex flex-wrap gap-2 mb-4">
+            <a href="https://www.freecodecamp.org/learn/scientific-computing-with-python/" target="_blank" class="quicklink">freecodecamp the python certification</a>
+            <a href="https://cs50.harvard.edu/python/2022/" target="_blank" class="quicklink">CS50P</a>
+            <a href="https://leetcode.com/problemset/?difficulty=EASY" target="_blank" class="quicklink">LeetCode</a>
+            <a href="https://github.com/codecrafters-io/build-your-own-x" target="_blank" class="quicklink">build-your-own-x</a>
+            <a href="https://github.com/Nicklamdigas" target="_blank" class="quicklink">GitHub Profile</a>
+            <a href="https://github.com/donnemartin/system-design-primer" target="_blank" class="quicklink">System Design</a>
+        </div>
+
+        <!-- Anti-AI rules -->
+        <div class="bg-amber-50 border border-amber-200 rounded-xl p-3.5 mb-4">
+            <p class="text-[10px] font-bold text-amber-700 uppercase tracking-wider mb-1.5">Anti-AI Rules &mdash; Read Before Every Session</p>
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-0.5">
+                <p class="text-xs text-amber-700">1. Write code first (20-30 min), ask AI second</p>
+                <p class="text-xs text-amber-700">2. Never paste code you cannot explain line by line</p>
+                <p class="text-xs text-amber-700">3. Ask AI "why does this work?" not "write this for me"</p>
+                <p class="text-xs text-amber-700">4. Read error messages yourself before asking AI</p>
+                <p class="text-xs text-amber-700">5. Comment your own code before AI reviews it</p>
+            </div>
+        </div>
+
+        <!-- Habit Tracker -->
+        <div id="habit-tracker-card" class="phase-card mb-5"></div>
+
+        <!-- Phase cards -->
+        <div id="phase-cards" class="space-y-4"></div>
+
+        <!-- Week Deep Dive -->
+        <div id="week-deep-dive" class="mt-4"></div>
+
+        <!-- Quick Journal Note -->
+        <div id="journal-note-card" class="phase-card mt-4"></div>
+
+        <!-- Friday Check-In -->
+        <div class="phase-card mt-4">
+            <div class="bg-slate-800 px-5 py-3 rounded-t-xl">
+                <h3 class="text-sm font-bold text-white">Friday Progress Check</h3>
+                <p class="text-[10px] text-slate-400 mt-0.5">Answer every Friday in your dev-journal &mdash; be honest</p>
+            </div>
+            <div id="friday-checks"></div>
+        </div>
+
+        <div class="h-12"></div>
+    </div>
+</div><!-- end roadmap-view -->
+
+<!-- SESSION MODAL -->
+<div id="modal-overlay" class="modal-overlay fixed inset-0 z-50 hidden flex items-center justify-center">
+    <div class="bg-white rounded-xl shadow-2xl w-full max-w-md m-4 border border-slate-200 overflow-hidden">
+        <div class="bg-slate-50 px-6 py-4 border-b border-slate-200 flex justify-between items-center">
+            <h3 id="modal-title" class="font-bold text-base text-slate-800">Add Session</h3>
+            <button onclick="closeModal()" class="text-slate-400 hover:text-slate-600 text-2xl leading-none">&times;</button>
+        </div>
+        <form id="session-form" onsubmit="saveSession(event)" class="p-5 space-y-4">
+            <input type="hidden" id="inp-id">
+            <div>
+                <label class="block text-[10px] font-bold text-slate-500 uppercase tracking-wider mb-1">Title</label>
+                <input type="text" id="inp-title" required class="w-full px-3 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-sky-500 outline-none text-sm">
+            </div>
+            <div>
+                <label class="block text-[10px] font-bold text-slate-500 uppercase tracking-wider mb-1">Description</label>
+                <input type="text" id="inp-desc" class="w-full px-3 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-sky-500 outline-none text-sm">
+            </div>
+            <div class="grid grid-cols-2 gap-3">
+                <div>
+                    <label class="block text-[10px] font-bold text-slate-500 uppercase tracking-wider mb-1">Day</label>
+                    <select id="inp-day" class="w-full px-3 py-2 border border-slate-300 rounded-lg outline-none text-sm bg-white">
+                        <option>Monday</option><option>Tuesday</option><option>Wednesday</option>
+                        <option>Thursday</option><option>Friday</option><option>Saturday</option><option>Sunday</option>
+                    </select>
+                </div>
+                <div>
+                    <label class="block text-[10px] font-bold text-slate-500 uppercase tracking-wider mb-1">Type</label>
+                    <input type="text" id="inp-type" list="type-opts" class="w-full px-3 py-2 border border-slate-300 rounded-lg outline-none text-sm" placeholder="e.g. Study">
+                    <datalist id="type-opts">
+                        <option value="Class"><option value="Study"><option value="Venture">
+                        <option value="Workout"><option value="Routine"><option value="Fun"><option value="Commute">
+                    </datalist>
+                </div>
+            </div>
+            <div class="grid grid-cols-2 gap-3">
+                <div>
+                    <label class="block text-[10px] font-bold text-slate-500 uppercase tracking-wider mb-1">Start</label>
+                    <input type="time" id="inp-start" required class="w-full px-3 py-2 border border-slate-300 rounded-lg outline-none text-sm">
+                </div>
+                <div>
+                    <label class="block text-[10px] font-bold text-slate-500 uppercase tracking-wider mb-1">End</label>
+                    <input type="time" id="inp-end" required class="w-full px-3 py-2 border border-slate-300 rounded-lg outline-none text-sm">
+                </div>
+            </div>
+            <div class="pt-3 flex justify-between items-center border-t border-slate-100">
+                <button type="button" id="btn-delete" onclick="deleteSession()" class="text-red-500 hover:text-red-700 text-sm font-medium hidden">Delete</button>
+                <div class="flex gap-2 ml-auto">
+                    <button type="button" onclick="closeModal()" class="px-4 py-2 text-slate-500 hover:bg-slate-100 rounded-lg text-sm">Cancel</button>
+                    <button type="submit" class="px-5 py-2 bg-sky-600 hover:bg-sky-700 text-white font-semibold rounded-lg text-sm shadow">Save</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+<script>
+// ============================================================
+// CONSTANTS
+// ============================================================
+const START_HOUR  = 6;
+const END_HOUR    = 22.5;
+const TOTAL_HOURS = END_HOUR - START_HOUR;
+const DAYS = ['Monday','Tuesday','Wednesday','Thursday','Friday','Saturday','Sunday'];
+let HOUR_HEIGHT = 50;
+
+// Week 1 starts Monday 23 Feb 2026
+const BREAK_START = new Date('2026-02-23T00:00:00');
+
+const HABITS = [
+    { key:'bootdev',  label:'freecodecamp the python certification',    emoji:'&#128218;' },
+    { key:'leetcode', label:'LeetCode',    emoji:'&#9889;'   },
+    { key:'github',   label:'GitHub Commit', emoji:'&#128025;'},
+    { key:'journal',  label:'Dev Journal', emoji:'&#128221;' },
+];
+
+// ============================================================
+// WEEK PLAN
+// ============================================================
+const WEEK_PLAN = [
+  { week:1,  phase:'Phase 1', title:'Python Basics + CS50P Wk 0-1',
+    detail:'freecodecamp the python certification Ch 1-5 / CS50P Wk 0-1 / LeetCode 3 Easys/day',
+    bootdev:'Learn Python (Ch 1-5: Intro, Variables, Functions, Scope, Testing)',
+    cs50p:'Week 0: Functions, Variables | Week 1: Conditionals',
+    leetcode:'3 Easy/day - Arrays and Strings only',
+    project:'Setup phase1-python folder / CLI Task Manager skeleton',
+    tip:'Open freecodecamp the python certification in the morning. Write every exercise yourself before reading the solution.' },
+  { week:2,  phase:'Phase 1', title:'Python Data Structures + CS50P Wk 2-3',
+    detail:'freecodecamp the python certification Ch 6-11 / CS50P Loops + Exceptions / 5 Easys/day',
+    bootdev:'Learn Python (Ch 6-11: Computing, Comparisons, Loops, Lists, Dicts, Sets)',
+    cs50p:'Week 2: Loops | Week 3: Exceptions',
+    leetcode:'5 Easy/day - introduce Hash Maps',
+    project:'Complete CLI Task Manager (add/list/done/delete to JSON)',
+    tip:'After every problem, explain your solution out loud as if teaching. If you cannot, rewrite it until you can.' },
+  { week:3,  phase:'Phase 1', title:'OOP Deep + CS50P Wk 4-5 + Task Manager done',
+    detail:'freecodecamp the python certification OOP course / CS50P Libraries and File I/O',
+    bootdev:'Learn OOP (Ch 1-6: Clean Code, Classes, Encapsulation, Abstraction, Inheritance, Polymorphism)',
+    cs50p:'Week 4: Libraries | Week 5: Unit Tests',
+    leetcode:'5 Easys/day + 1 Medium/week',
+    project:'Push CLI Task Manager to GitHub with README / Start Grade Calculator',
+    tip:'Before writing a class, draw it on paper: what data does it hold? what can it do? Then write the code.' },
+  { week:4,  phase:'Phase 1', title:'Functional Programming + DSA Intro',
+    detail:'freecodecamp the python certification Functional Prog / CS50P File I/O / Big O intro',
+    bootdev:'Learn Functional Programming (Ch 1-9) + Learn DSA (Ch 1-5: Big O, Sorting)',
+    cs50p:'Week 6: File I/O',
+    leetcode:'5 Easys/day + 2 Mediums/week',
+    project:'Complete + push Student Grade Calculator (CSV to averages to pass/fail)',
+    tip:'Learn Big O, then label the complexity of each function in code you already wrote. Build this habit.' },
+  { week:5,  phase:'Phase 1', title:'DSA Deep + CS50P Final + Shell project',
+    detail:'freecodecamp the python certification DSA Trees/Graphs / CS50P Wk 7-9 / build-your-own Shell',
+    bootdev:'Learn DSA (Ch 6-16: Stacks, Queues, Linked Lists, Trees, Graphs, BFS/DFS)',
+    cs50p:'Week 7: RegEx | Week 8: OOP | Week 9: Final Project',
+    leetcode:'5 Easys/day + 3 Mediums/week - introduce Trees',
+    project:'Web Scraper (news to JSON) / Start build-your-own Shell in Python',
+    tip:'For DSA: implement every structure from scratch. Not just read - code it. Array, linked list, stack, binary tree.' },
+  { week:6,  phase:'Phase 2', title:'HTML/CSS Mastery + Django Tutorial Start',
+    detail:'freeCodeCamp Responsive Web Design / Django Tutorial Parts 1-3',
+    bootdev:'Build Bookbot project (complete) + Build Asteroids (complete)',
+    cs50p:'Complete CS50P if not done. Optionally start CS50W.',
+    leetcode:'3 Easys + 2 Mediums/day',
+    project:'Portfolio website: wireframe on paper first, then build HTML structure',
+    tip:'Draw your portfolio layout on paper before writing HTML. Responsive = does it look right on your phone?' },
+  { week:7,  phase:'Phase 2', title:'JavaScript Fundamentals + Django Models',
+    detail:'javascript.info Ch 1-8 / Django Tutorial Parts 4-6 / Portfolio CSS + JS',
+    bootdev:'DSA review/complete + Build Static Site Generator project',
+    cs50p:'-',
+    leetcode:'3 Easys + 2 Mediums/day',
+    project:'Portfolio: complete HTML + CSS + responsive + deploy to GitHub Pages',
+    tip:'Vanilla JS only - no jQuery or React yet. When something breaks, read the browser console before asking AI.' },
+  { week:8,  phase:'Phase 2', title:'Django REST Framework + Django Blog',
+    detail:'DRF official tutorial / Mozilla MDN Django / Blog with auth',
+    bootdev:'Learn Data Structures review + Personal Project 1 start',
+    cs50p:'-',
+    leetcode:'3 Easys + 3 Mediums/day',
+    project:'Django Blog: CRUD posts + user auth + MySQL + push to GitHub',
+    tip:'Design your Blog DB tables on paper first: Users, Posts, Comments. Draw the ER diagram before touching models.py.' },
+  { week:9,  phase:'Phase 3', title:'Linux + MySQL Advanced + JWT Auth',
+    detail:'freecodecamp the python certification Learn Linux / MySQL JOINs, indexes, normalization',
+    bootdev:'Learn Linux (all chapters) + Learn Memory Management in C',
+    cs50p:'-',
+    leetcode:'2 Easys + 3 Mediums + 1 Hard/week',
+    project:'School Management System: draw ER diagram on paper first then Django models',
+    tip:'For the School System: identify 5+ tables and all foreign keys before writing any code. Paper first, always.' },
+  { week:10, phase:'Phase 3', title:'Docker + GitHub Actions + School System API',
+    detail:'Docker getting-started / GitHub Actions quickstart / School System DRF',
+    bootdev:'Personal Project 1 (build something real for your portfolio)',
+    cs50p:'-',
+    leetcode:'2 Mediums + 1 Hard/day',
+    project:'School System: all DRF API endpoints + pytest tests',
+    tip:'Test every endpoint with curl or Postman before building the frontend. Know the API works first.' },
+  { week:11, phase:'Phase 3', title:'School System Frontend + build-your-own Database',
+    detail:'HTML/CSS/JS dashboard consuming your own API / System Design intro',
+    bootdev:'Learn Go (optional) or continue personal project',
+    cs50p:'-',
+    leetcode:'2 Mediums + 1 Hard/day',
+    project:'School System: frontend dashboard + deploy live on Render',
+    tip:'Build-your-own Database in Python - you will understand indexes forever after that.' },
+  { week:12, phase:'Phase 4', title:'Portfolio Polish + CV + First Applications',
+    detail:'Write CV / Complete GitHub README / Pin 3 repos / Apply internships',
+    bootdev:'-',
+    cs50p:'-',
+    leetcode:'1 Medium + 1 Hard/day',
+    project:'Write CV / Update LinkedIn / Apply to 5+ roles this week',
+    tip:'For every project on your CV, practice answering: What was hardest? What would you do differently? Out loud.' },
+];
+
+// ============================================================
+// SCHOOL SESSIONS
+// ============================================================
+const schoolSessions = [
+    { id:2,  day:'Monday',    start:11, end:14, title:'Simulation Class',     details:'Online',              type:'Class'   },
+    { id:3,  day:'Monday',    start:15, end:17, title:'Study: Simulation',    details:'Review and Practice', type:'Study'   },
+    { id:5,  day:'Tuesday',   start:8,  end:11, title:'Mobile Prog Class',    details:'A202 LAB',            type:'Class'   },
+    { id:6,  day:'Tuesday',   start:11, end:14, title:'Config Mgmt Class',    details:'Online',              type:'Class'   },
+    { id:7,  day:'Tuesday',   start:14, end:17, title:'Visual Prog Class',    details:'ICT 1',               type:'Class'   },
+    { id:8,  day:'Tuesday',   start:19, end:21, title:'Study: Mobile Prog',   details:'Android Dev',         type:'Study'   },
+    { id:9,  day:'Wednesday', start:11, end:14, title:'Dist. Computing',      details:'A002',                type:'Class'   },
+    { id:10, day:'Wednesday', start:14, end:17, title:'Network Eng',          details:'A103',                type:'Class'   },
+    { id:11, day:'Wednesday', start:19, end:21, title:'Study: Dist Comp',     details:'Concepts and Code',   type:'Study'   },
+    { id:12, day:'Thursday',  start:11, end:13, title:'Study: Visual Prog',   details:'C#/.NET Build',       type:'Study'   },
+    { id:13, day:'Thursday',  start:14, end:17, title:'Internet Prog',        details:'A303',                type:'Class'   },
+    { id:14, day:'Thursday',  start:19, end:21, title:'Study: Internet Prog', details:'PHP/MySQL',           type:'Study'   },
+    { id:15, day:'Friday',    start:10, end:12, title:'Study: Network Eng',   details:'Lab and Theory',      type:'Study'   },
+    { id:16, day:'Saturday',  start:10, end:12, title:'Study: Config Mgmt',   details:'Git/CI/CD',           type:'Study'   },
+    { id:18, day:'Saturday',  start:14, end:17, title:'Project Dev',          details:'PBL Workshop',        type:'Venture' },
+    { id:17, day:'Sunday',    start:14, end:16, title:'Study: Extra Review',  details:'Weakest Unit Focus',  type:'Study'   },
+];
+
+// ============================================================
+// BREAK SESSIONS
+// ============================================================
+const WEEKDAY_TPL = [
+    { startH:8,  endH:9,  title:'freecodecamp the python certification',              details:'1+ chapters - write it yourself',         type:'Study'   },
+    { startH:9,  endH:11, title:'CS50P / LeetCode',      details:'Paper-first, then type - no AI hints',    type:'Study'   },
+    { startH:11, endH:13, title:'Project Build',         details:'Phase project - no AI writing core logic',type:'Venture' },
+    { startH:14, endH:16, title:'Deep Work',             details:'build-your-own-x or project overflow',    type:'Venture' },
+    { startH:16, endH:17, title:'Review + Dev Journal',  details:'Reflect and commit to GitHub',            type:'Routine' },
+    { startH:17, endH:18, title:'Networking',            details:'LinkedIn / Discord / Twitter',            type:'Routine' },
+];
+function buildBreakSessions() {
+    const out = []; let id = 2000;
+    ['Monday','Tuesday','Wednesday','Thursday','Friday'].forEach(day => {
+        WEEKDAY_TPL.forEach(t => out.push({ id:id++, day, start:t.startH, end:t.endH, title:t.title, details:t.details, type:t.type }));
+    });
+    out.push({ id:id++, day:'Saturday', start:10, end:12, title:'LeetCode Practice',      details:'Easy x5 + Medium x2 timed',       type:'Study'   });
+    out.push({ id:id++, day:'Saturday', start:14, end:17, title:'build-your-own Sprint',  details:'Shell to Web Server to Database',  type:'Venture' });
+    out.push({ id:id++, day:'Sunday',   start:14, end:16, title:'Weekly Review',          details:'Answer 6 progress questions',      type:'Routine' });
+    out.push({ id:id++, day:'Sunday',   start:16, end:18, title:'Light Reading / Rest',   details:'Tech articles / Podcast / Recharge',type:'Fun'    });
+    return out;
+}
+const breakSessions = buildBreakSessions();
+
+// ============================================================
+// PHASES
+// ============================================================
+const PHASES = [
+  { id:'phase0', title:'Phase 0: Environment + Mindset', badge:'Done', accent:'#64748b', bg:'bg-slate-100',
+    topics:[
+      { id:'p0_0', text:'VS Code + Python + Git + extensions installed',    done:true  },
+      { id:'p0_1', text:'Git configured (name, email, VS Code editor)',      done:true  },
+      { id:'p0_2', text:'dev-journal repo live on GitHub',                  done:true  },
+      { id:'p0_3', text:'academic_automator cloned to Windows',             done:true  },
+      { id:'p0_4', text:'GitHub Profile README created (Nicklamdigas)',      done:false },
+    ]},
+  { id:'phase1', title:'Phase 1: Python + CS Fundamentals', badge:'Weeks 1-5', accent:'#16a34a', bg:'bg-green-50',
+    resources:[
+      { label:'freecodecamp the python certification',         url:'https://www.freecodecamp.org/learn/scientific-computing-with-python/' },
+      { label:'CS50P',            url:'https://cs50.harvard.edu/python/2022/' },
+      { label:'LeetCode',         url:'https://leetcode.com/problemset/?difficulty=EASY' },
+      { label:'build-your-own-x', url:'https://github.com/codecrafters-io/build-your-own-x' },
+    ],
+    topics:[
+      { id:'p1_0',  text:'freecodecamp the python certification: Learn Python - all 14 chapters, every exercise yourself',       done:false },
+      { id:'p1_1',  text:'freecodecamp the python certification: Learn Linux - terminals, filesystem, permissions, I/O',          done:false },
+      { id:'p1_2',  text:'freecodecamp the python certification: Learn OOP - classes, encapsulation, inheritance, polymorphism',  done:false },
+      { id:'p1_3',  text:'freecodecamp the python certification: Learn Functional Programming - pure functions, closures, decorators', done:false },
+      { id:'p1_4',  text:'freecodecamp the python certification: Learn DSA - Big O, sorting, trees, graphs, BFS/DFS',            done:false },
+      { id:'p1_5',  text:'freecodecamp the python certification: Build Bookbot project',                                          done:false },
+      { id:'p1_6',  text:'freecodecamp the python certification: Build Asteroids project',                                        done:false },
+      { id:'p1_7',  text:'freecodecamp the python certification: Build Static Site Generator project',                            done:false },
+      { id:'p1_8',  text:'CS50P: Complete all weeks + problem sets (20-min solo attempt first)',     done:false },
+      { id:'p1_9',  text:'LeetCode: 50+ Easy problems in Python (no AI solutions)',                  done:false },
+      { id:'p1_10', text:'Project: CLI Task Manager - add/list/done/delete to JSON file',           done:false },
+      { id:'p1_11', text:'Project: Student Grade Calculator - CSV to averages + pass/fail',         done:false },
+      { id:'p1_12', text:'Project: Web Scraper - headlines to JSON, CLI --url flag',                 done:false },
+      { id:'p1_13', text:'build-your-own: Shell in Python - every line commented by you',            done:false },
+    ]},
+  { id:'phase2', title:'Phase 2: Full-Stack Web Development', badge:'Weeks 6-8', accent:'#2563eb', bg:'bg-blue-50',
+    resources:[
+      { label:'freeCodeCamp',    url:'https://www.freecodecamp.org/learn/2022/responsive-web-design/' },
+      { label:'javascript.info', url:'https://javascript.info' },
+      { label:'Django Tutorial', url:'https://docs.djangoproject.com/en/stable/intro/tutorial01/' },
+      { label:'DRF Quickstart',  url:'https://www.django-rest-framework.org/tutorial/quickstart/' },
+    ],
+    topics:[
+      { id:'p2_0', text:'HTML/CSS: Semantic HTML5, Flexbox, Grid, Media Queries (freeCodeCamp cert)', done:false },
+      { id:'p2_1', text:'JavaScript: DOM, events, fetch API, async/await - vanilla only, no frameworks', done:false },
+      { id:'p2_2', text:'Read javascript.info Ch 1-8 cover to cover',                                  done:false },
+      { id:'p2_3', text:'Django: Complete official tutorial Parts 1-7 (polls app)',                    done:false },
+      { id:'p2_4', text:'Django REST Framework: quickstart + build 5 custom endpoints',                done:false },
+      { id:'p2_5', text:'Project: Portfolio Website - responsive, GitHub Pages deploy',                done:false },
+      { id:'p2_6', text:'Project: Django Blog - CRUD + user auth + MySQL + deployed on Render',        done:false },
+      { id:'p2_7', text:'build-your-own: Web Server in Python',                                        done:false },
+    ]},
+  { id:'phase3', title:'Phase 3: Backend Depth + Linux + Deployment', badge:'Weeks 9-11', accent:'#9333ea', bg:'bg-purple-50',
+    resources:[
+      { label:'System Design Primer', url:'https://github.com/donnemartin/system-design-primer' },
+      { label:'Docker Docs',          url:'https://docs.docker.com/get-started/' },
+      { label:'GitHub Actions',       url:'https://docs.github.com/en/actions/quickstart' },
+      { label:'Render Deploy',        url:'https://render.com/docs/deploy-django' },
+    ],
+    topics:[
+      { id:'p3_0',  text:'MySQL: JOINs, subqueries, transactions, indexes, normalization 1NF-3NF',  done:false },
+      { id:'p3_1',  text:'JWT authentication: implement in Django + understand token flow',          done:false },
+      { id:'p3_2',  text:'Testing: write pytest unit + integration tests for an API',                done:false },
+      { id:'p3_3',  text:'Linux: file permissions, process management, SSH, bash scripting',         done:false },
+      { id:'p3_4',  text:'Docker: Dockerfile + docker-compose.yml for a Django app',                done:false },
+      { id:'p3_5',  text:'GitHub Actions: CI pipeline that runs tests on every push',                done:false },
+      { id:'p3_6',  text:'System Design: Read System Design Primer intro (CAP, scalability)',        done:false },
+      { id:'p3_7',  text:'Flagship: School Management System - ER diagram on paper FIRST',           done:false },
+      { id:'p3_8',  text:'Flagship: Django models, DRF API, JWT auth, MySQL, pytest tests',          done:false },
+      { id:'p3_9',  text:'Flagship: Frontend dashboard (HTML/CSS/JS) consuming own API',            done:false },
+      { id:'p3_10', text:'Flagship: Deployed live on Render with public URL',                       done:false },
+      { id:'p3_11', text:'build-your-own: Database in Python',                                       done:false },
+    ]},
+  { id:'phase4', title:'Phase 4: Portfolio Polish + Job Prep', badge:'Week 12+', accent:'#ea580c', bg:'bg-orange-50',
+    resources:[
+      { label:'GitHub Pages', url:'https://pages.github.com' },
+      { label:'LinkedIn',     url:'https://linkedin.com' },
+      { label:'Upwork',       url:'https://upwork.com' },
+      { label:'Zindi Africa', url:'https://zindi.africa' },
+    ],
+    topics:[
+      { id:'p4_0', text:'GitHub: 3+ pinned repos each with README + screenshots + live link',   done:false },
+      { id:'p4_1', text:'GitHub Profile README: bio, skills, what you are building, links',     done:false },
+      { id:'p4_2', text:'CV written - 1 page, specific (Built REST API with DRF + MySQL)',      done:false },
+      { id:'p4_3', text:'LinkedIn: complete profile + post once/week about learning',           done:false },
+      { id:'p4_4', text:'Networking: attend 1 Nairobi tech event (iHub, Meetup, hackathon)',    done:false },
+      { id:'p4_5', text:'Open Source: 1-2 contributions to a Python/Django project',            done:false },
+      { id:'p4_6', text:'Applications: 5+ internship/junior role applications sent',            done:false },
+      { id:'p4_7', text:'Freelance: Upwork profile set up with School System as portfolio',     done:false },
+    ]},
+];
+
+const FRIDAY_Q = [
+    'What can I build today that I could not build last week?',
+    'Can I explain every line of code I wrote this week?',
+    'Did I solve at least one problem myself before asking AI?',
+    'Did I commit code to GitHub at least 4 days this week?',
+    'Did I complete at least one freecodecamp the python certification chapter this week?',
+    'Did I write a dev-journal entry every day this week?',
+];
+
+// ============================================================
+// STATE
+// ============================================================
+let currentView     = 'schedule';
+let currentMode     = 'break';
+let currentWeek     = 1;
+let customSessions  = [];
+let checkedTopics   = {};
+let fridayChecks    = {};
+let habitData       = {};
+let collapsedPhases = new Set();
+let activeFilters   = new Set(['all']);
+let activeSessions  = [];
+
+// ============================================================
+// INIT
+// ============================================================
+function init() {
+    loadState();
+    calculateLayout();
+    renderGridStructure();
+    rebuildActiveSessions();
+    renderSessions();
+    renderWeekFocus();
+    renderTodayFocus();
+    renderRoadmap();
+    renderFridayChecks();
+    updateStreakBadge();
+    setInterval(updateClock, 1000);
+    setInterval(function() { renderCurrentTimeLine(); renderTodayFocus(); }, 30000);
+    updateClock();
+    // Auto-scroll to today
+    var todayName = new Date().toLocaleDateString('en-US', { weekday:'long' });
+    var todayIdx  = DAYS.indexOf(todayName);
+    if (todayIdx >= 0) {
+        setTimeout(function() {
+            var c = document.getElementById('schedule-container');
+            if (c) c.scrollLeft = Math.max(0, (todayIdx * c.scrollWidth / 7) - c.clientWidth / 4);
+        }, 200);
+    }
+    window.addEventListener('resize', function() {
+        calculateLayout();
+        document.getElementById('grid-background').innerHTML = '';
+        document.getElementById('time-labels').innerHTML     = '';
+        document.getElementById('day-headers').innerHTML     = '';
+        renderGridStructure();
+        renderSessions();
+    });
+}
+
+function loadState() {
+    try {
+        var raw = localStorage.getItem('lifeos_v5');
+        if (raw) {
+            var s = JSON.parse(raw);
+            currentMode     = s.mode      || 'break';
+            currentWeek     = s.week      || 1;
+            customSessions  = s.custom    || [];
+            checkedTopics   = s.topics    || {};
+            fridayChecks    = s.friday    || {};
+            habitData       = s.habits    || {};
+            collapsedPhases = new Set(s.collapsed || []);
+        }
+    } catch(e) {}
+    updateModeButtons();
+}
+
+function persist() {
+    localStorage.setItem('lifeos_v5', JSON.stringify({
+        mode: currentMode, week: currentWeek,
+        custom: customSessions, topics: checkedTopics, friday: fridayChecks,
+        habits: habitData, collapsed: Array.from(collapsedPhases),
+    }));
+}
+
+function rebuildActiveSessions() {
+    activeSessions = currentMode === 'break'
+        ? breakSessions.concat(customSessions)
+        : schoolSessions.concat(customSessions);
+}
+
+function calculateLayout() {
+    HOUR_HEIGHT = Math.max(30, (window.innerHeight - 220) / TOTAL_HOURS);
+}
+
+// ============================================================
+// UTILITIES
+// ============================================================
+function getTodayStr() {
+    var d = new Date();
+    return d.getFullYear() + '-' +
+           String(d.getMonth()+1).padStart(2,'0') + '-' +
+           String(d.getDate()).padStart(2,'0');
+}
+
+function getWeekDates(n) {
+    var s = new Date(BREAK_START);
+    s.setDate(s.getDate() + (n-1)*7);
+    var e = new Date(s); e.setDate(e.getDate()+6);
+    var fmt = function(d) { return d.toLocaleDateString('en-US',{month:'short',day:'numeric'}); };
+    return fmt(s) + ' - ' + fmt(e);
+}
+
+function getStreak() {
+    var streak = 0;
+    var d = new Date();
+    for (var i = 0; i < 365; i++) {
+        var ds = d.getFullYear() + '-' + String(d.getMonth()+1).padStart(2,'0') + '-' + String(d.getDate()).padStart(2,'0');
+        var day = habitData[ds] || {};
+        if (!HABITS.every(function(h){ return !!day[h.key]; })) break;
+        streak++;
+        d.setDate(d.getDate()-1);
+    }
+    return streak;
+}
+
+function updateStreakBadge() {
+    var s = getStreak();
+    var el = document.getElementById('header-streak');
+    if (!el) return;
+    if (s > 0) {
+        el.textContent = s + ' day streak';
+        el.classList.remove('hidden');
+    } else {
+        el.classList.add('hidden');
+    }
+}
+
+function timeToDec(t) { var p=t.split(':').map(Number); return p[0]+p[1]/60; }
+function decToTime(d) { var h=Math.floor(d),m=Math.round((d-h)*60); return String(h).padStart(2,'0')+':'+String(m).padStart(2,'0'); }
+function esc(s) { return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;'); }
+
+function updateClock() {
+    var el = document.getElementById('clock-display');
+    if (!el) return;
+    var now = new Date();
+    el.textContent = now.toLocaleTimeString('en-US',{hour:'numeric',minute:'2-digit',second:'2-digit',hour12:true})
+        + '  |  ' + now.toLocaleDateString('en-US',{weekday:'short',month:'short',day:'numeric'});
+}
+
+// ============================================================
+// VIEW + MODE
+// ============================================================
+function switchView(v) {
+    currentView = v;
+    document.getElementById('schedule-view').classList.toggle('active', v==='schedule');
+    document.getElementById('roadmap-view').classList.toggle('active', v==='roadmap');
+    document.getElementById('tab-schedule').classList.toggle('active', v==='schedule');
+    document.getElementById('tab-roadmap').classList.toggle('active', v==='roadmap');
+    if (v==='roadmap') { renderRoadmap(); renderFridayChecks(); }
+}
+
+function switchMode(m) {
+    currentMode = m;
+    updateModeButtons();
+    rebuildActiveSessions();
+    renderSessions();
+    renderTodayFocus();
+    persist();
+}
+
+function updateModeButtons() {
+    document.getElementById('mode-break').classList.toggle('active', currentMode==='break');
+    document.getElementById('mode-school').classList.toggle('active', currentMode==='school');
+}
+
+// ============================================================
+// WEEK NAV
+// ============================================================
+function changeWeek(d) {
+    currentWeek = Math.max(1, Math.min(12, currentWeek+d));
+    renderWeekFocus();
+    renderTodayFocus();
+    if (currentView==='roadmap') { renderRoadmap(); renderFridayChecks(); }
+    persist();
+}
+
+function renderWeekFocus() {
+    var w = WEEK_PLAN[currentWeek-1];
+    document.getElementById('week-badge').textContent   = 'Week ' + w.week;
+    document.getElementById('focus-title').textContent  = w.phase + ' - ' + w.title;
+    document.getElementById('focus-detail').textContent = getWeekDates(currentWeek) + '  |  ' + w.detail;
+    document.getElementById('week-counter').textContent = currentWeek + ' / 12';
+}
+
+// ============================================================
+// TODAY FOCUS BAR
+// ============================================================
+function renderTodayFocus() {
+    var bar = document.getElementById('today-focus-bar');
+    if (!bar) return;
+    var now      = new Date();
+    var todayStr = now.toLocaleDateString('en-US',{weekday:'long'});
+    var curH     = now.getHours() + now.getMinutes()/60;
+    var today    = activeSessions.filter(function(s){ return s.day===todayStr; })
+                                 .sort(function(a,b){ return a.start-b.start; });
+    if (!today.length) { bar.classList.add('hidden'); return; }
+    bar.classList.remove('hidden');
+    var cur  = today.find(function(s){ return s.start<=curH && s.end>curH; });
+    var next = today.find(function(s){ return s.start>curH; });
+    var html = '<span class="text-[10px] font-bold text-slate-400 uppercase tracking-widest flex-shrink-0 mr-1">Today</span>';
+    if (cur) {
+        var mLeft = Math.round((cur.end-curH)*60);
+        html += '<div class="flex items-center gap-1.5 px-2.5 py-1 now-pill rounded-lg flex-shrink-0">'
+              + '<span class="text-[10px] font-bold">NOW</span>'
+              + '<span class="text-xs font-semibold">' + esc(cur.title) + '</span>'
+              + '<span class="text-[10px] opacity-75">- ' + mLeft + 'm left</span></div>';
+    }
+    if (next) {
+        var mUntil = Math.round((next.start-curH)*60);
+        html += '<div class="flex items-center gap-1.5 px-2.5 py-1 next-pill rounded-lg flex-shrink-0">'
+              + '<span class="text-[10px] font-bold">NEXT</span>'
+              + '<span class="text-xs font-semibold">' + esc(next.title) + '</span>'
+              + '<span class="text-[10px] opacity-75">in ' + mUntil + 'm at ' + decToTime(next.start) + '</span></div>';
+    }
+    if (!cur && !next) {
+        html += '<div class="px-2.5 py-1 done-pill rounded-lg flex-shrink-0">'
+              + '<span class="text-xs">All sessions done - commit to GitHub and rest well!</span></div>';
+    }
+    bar.innerHTML = html;
+}
+
+// ============================================================
+// GRID
+// ============================================================
+function renderGridStructure() {
+    var todayName = new Date().toLocaleDateString('en-US',{weekday:'long'});
+    var dh = document.getElementById('day-headers');
+    dh.innerHTML = '';
+    DAYS.forEach(function(day) {
+        var isToday = day===todayName;
+        var d = document.createElement('div');
+        d.className = 'flex-1 p-2 text-center text-xs border-r border-slate-200 last:border-0 '
+            + (isToday ? 'bg-sky-50 text-sky-700 font-bold' : 'bg-slate-50 text-slate-600 font-semibold');
+        d.textContent = day + (isToday ? ' *' : '');
+        dh.appendChild(d);
+    });
+    document.querySelectorAll('.day-col').forEach(function(col,i) {
+        col.style.background = DAYS[i]===todayName ? 'rgba(14,165,233,0.04)' : '';
+    });
+    var tl = document.getElementById('time-labels');
+    var gb = document.getElementById('grid-background');
+    tl.innerHTML = ''; gb.innerHTML = '';
+    for (var i=START_HOUR; i<=Math.ceil(END_HOUR); i++) {
+        var lbl = document.createElement('div');
+        lbl.className = 'time-label';
+        lbl.style.height = HOUR_HEIGHT + 'px';
+        var h = Math.floor(i);
+        lbl.textContent = (h>12?h-12:h) + ' ' + (h>=12?'PM':'AM');
+        tl.appendChild(lbl);
+        var line = document.createElement('div');
+        line.className = 'grid-line w-full';
+        line.style.height = HOUR_HEIGHT + 'px';
+        gb.appendChild(line);
+    }
+}
+
+// ============================================================
+// CURRENT TIME LINE
+// ============================================================
+function renderCurrentTimeLine() {
+    var old = document.getElementById('time-now-line');
+    if (old) old.remove();
+    var now = new Date();
+    var h   = now.getHours() + now.getMinutes()/60;
+    if (h < START_HOUR || h >= END_HOUR) return;
+    var top = (h - START_HOUR) * HOUR_HEIGHT;
+    var line = document.createElement('div');
+    line.id = 'time-now-line';
+    line.style.cssText = 'position:absolute;top:' + top + 'px;left:0;right:0;height:2px;background:#ef4444;z-index:25;pointer-events:none;';
+    line.innerHTML = '<div style="position:absolute;left:-4px;top:-4px;width:10px;height:10px;background:#ef4444;border-radius:50%;border:2px solid white;box-shadow:0 0 0 3px rgba(239,68,68,0.2);"></div>';
+    document.getElementById('main-grid').appendChild(line);
+}
+
+// ============================================================
+// SESSIONS
+// ============================================================
+function renderSessions() {
+    document.querySelectorAll('.session-item').forEach(function(el){ el.remove(); });
+    var dayMap = {};
+    DAYS.forEach(function(d,i){ dayMap[d] = document.querySelectorAll('.day-col')[i]; });
+    var std = ['Routine','Class','Study','Venture','Workout','Fun','Commute'];
+    activeSessions.forEach(function(s) {
+        if (!activeFilters.has('all') && !activeFilters.has(s.type)) return;
+        var col = dayMap[s.day]; if (!col) return;
+        var div = document.createElement('div');
+        div.className = 'session-item';
+        if (std.includes(s.type)) {
+            div.classList.add('type-'+s.type);
+        } else {
+            var c = hashColor(s.type);
+            div.style.cssText = 'background:'+c.bg+';border-left:4px solid '+c.border+';color:'+c.text;
+        }
+        div.style.top    = (s.start-START_HOUR)*HOUR_HEIGHT + 'px';
+        div.style.height = (s.end-s.start)*HOUR_HEIGHT + 'px';
+        div.innerHTML = '<div class="font-bold truncate leading-tight">' + esc(s.title) + '</div>'
+                      + '<div class="truncate opacity-75 text-[9px]">' + esc(s.details) + '</div>';
+        div.onclick = function(e){ e.stopPropagation(); openModal(s.id); };
+        col.appendChild(div);
+    });
+    renderCurrentTimeLine();
+    rebuildFilterBar();
+}
+
+function hashColor(type) {
+    var h=0; for(var i=0;i<type.length;i++) h=type.charCodeAt(i)+((h<<5)-h);
+    var p=[{bg:'#fef3c7',border:'#d97706',text:'#92400e'},{bg:'#e0e7ff',border:'#4f46e5',text:'#3730a3'},
+           {bg:'#fce7f3',border:'#db2777',text:'#9d174d'},{bg:'#ccfbf1',border:'#0d9488',text:'#115e59'},
+           {bg:'#ecfccb',border:'#65a30d',text:'#365314'}];
+    return p[Math.abs(h)%p.length];
+}
+
+// ============================================================
+// HABIT TRACKER
+// ============================================================
+function renderHabitTracker() {
+    var card = document.getElementById('habit-tracker-card');
+    if (!card) return;
+    var days = [];
+    for (var i=6; i>=0; i--) {
+        var d = new Date(); d.setDate(d.getDate()-i);
+        days.push({
+            ds:      d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0'),
+            label:   d.toLocaleDateString('en-US',{weekday:'short'}),
+            num:     d.getDate(),
+            isToday: i===0,
+        });
+    }
+    var streak = getStreak();
+    var hdrCells = days.map(function(d){
+        return '<th class="text-center px-1 pb-2">'
+             + '<div class="text-[10px] font-semibold ' + (d.isToday?'text-sky-600':'text-slate-400') + '">' + d.label + '</div>'
+             + '<div class="text-[9px] font-bold ' + (d.isToday?'text-sky-700':'text-slate-300') + '">' + d.num + '</div>'
+             + '</th>';
+    }).join('');
+    var rows = HABITS.map(function(habit){
+        var cells = days.map(function(d){
+            var done = !!((habitData[d.ds]||{})[habit.key]);
+            var cls  = 'habit-cell' + (done?' done':'') + (d.isToday?' today-col':'');
+            return '<td class="text-center py-1 px-1"><div class="' + cls + '" onclick="toggleHabit(\''+d.ds+'\',\''+habit.key+'\')">' + (done?'&#10003;':'') + '</div></td>';
+        }).join('');
+        return '<tr><td class="text-xs text-slate-600 pr-3 py-1 whitespace-nowrap font-medium">' + habit.emoji + ' ' + habit.label + '</td>' + cells + '</tr>';
+    }).join('');
+    card.innerHTML = ''
+        + '<div class="bg-orange-50 px-5 py-3 rounded-t-xl flex items-center justify-between">'
+        + '<div><p class="text-sm font-bold text-slate-800">Daily Habit Tracker</p>'
+        + '<p class="text-[10px] text-slate-500 mt-0.5">Tap each cell to mark done - this is how you break the AI dependency</p></div>'
+        + '<div class="text-right"><div class="text-2xl font-bold mono ' + (streak>0?'text-orange-500':'text-slate-300') + '">' + streak + '</div>'
+        + '<div class="text-[10px] text-slate-400">day streak</div></div></div>'
+        + '<div class="p-4 overflow-x-auto"><table class="w-full min-w-[400px]">'
+        + '<thead><tr><th class="text-left text-[10px] font-bold text-slate-400 uppercase pb-2 pr-3 w-28">Habit</th>' + hdrCells + '</tr></thead>'
+        + '<tbody>' + rows + '</tbody></table></div>';
+}
+
+function toggleHabit(ds, key) {
+    if (!habitData[ds]) habitData[ds] = {};
+    habitData[ds][key] = !habitData[ds][key];
+    persist(); renderHabitTracker(); updateStreakBadge();
+}
+
+// ============================================================
+// QUICK JOURNAL NOTE
+// ============================================================
+function renderQuickNote() {
+    var card = document.getElementById('journal-note-card');
+    if (!card) return;
+    var today    = getTodayStr();
+    var note     = (habitData[today]||{}).note || '';
+    var dayLabel = new Date().toLocaleDateString('en-US',{weekday:'long',month:'long',day:'numeric'});
+    card.innerHTML = ''
+        + '<div class="bg-slate-100 px-5 py-3 rounded-t-xl flex items-center justify-between">'
+        + '<div><p class="text-sm font-bold text-slate-800">Quick Journal Note</p>'
+        + '<p class="text-[10px] text-slate-500 mt-0.5">' + dayLabel + ' - auto-saved</p></div>'
+        + '<a href="file:///C:/Nick/projects/dev-journal/" class="text-xs text-sky-500 hover:underline flex-shrink-0 ml-4">Open dev-journal</a></div>'
+        + '<div class="p-4">'
+        + '<textarea id="journal-ta" rows="4" class="w-full px-3 py-2 border border-slate-200 rounded-lg text-xs text-slate-700 focus:ring-2 focus:ring-sky-500 outline-none resize-none leading-relaxed" placeholder="What did you learn today? What was hard? What clicked? What will you do differently tomorrow?" oninput="saveNote(this.value)">' + esc(note) + '</textarea>'
+        + '<div class="flex justify-between mt-1.5">'
+        + '<p class="text-[10px] text-slate-400">Also write in your dev-journal repo for GitHub contribution graph</p>'
+        + '<span id="note-len" class="text-[10px] mono text-slate-400">' + note.length + '/500</span>'
+        + '</div></div>';
+}
+
+function saveNote(val) {
+    var today = getTodayStr();
+    if (!habitData[today]) habitData[today] = {};
+    habitData[today].note = val.slice(0,500);
+    var el = document.getElementById('note-len');
+    if (el) el.textContent = Math.min(val.length,500) + '/500';
+    persist();
+}
+
+// ============================================================
+// ROADMAP
+// ============================================================
+function renderRoadmap() {
+    var container = document.getElementById('phase-cards');
+    container.innerHTML = '';
+    var totalAll=0, doneAll=0;
+    PHASES.forEach(function(phase) {
+        var doneCnt  = phase.topics.filter(function(t){ return checkedTopics[t.id]!==undefined ? checkedTopics[t.id] : t.done; }).length;
+        var totalCnt = phase.topics.length;
+        totalAll += totalCnt; doneAll += doneCnt;
+        var pct = totalCnt ? Math.round(doneCnt/totalCnt*100) : 0;
+        var isCollapsed = collapsedPhases.has(phase.id);
+        var resHTML = (phase.resources||[]).map(function(r){
+            return '<a href="'+r.url+'" target="_blank" class="text-xs text-sky-600 hover:underline">'+r.label+'</a>';
+        }).join(' &middot; ');
+        var topicsHTML = phase.topics.map(function(t){
+            var checked = checkedTopics[t.id]!==undefined ? checkedTopics[t.id] : t.done;
+            return '<div class="topic-item">'
+                 + '<div class="check-box ' + (checked?'done':'') + '" onclick="toggleTopic(\''+t.id+'\')" style="'+(checked?'background:#16a34a;border-color:#16a34a;':'')+'"><span style="color:white;font-size:10px;font-weight:bold">'+(checked?'&#10003;':'')+'</span></div>'
+                 + '<span class="text-xs text-slate-700 ' + (checked?'line-through text-slate-400':'') + '">' + esc(t.text) + '</span>'
+                 + '</div>';
+        }).join('');
+        var card = document.createElement('div');
+        card.className = 'phase-card';
+        card.innerHTML = ''
+            + '<div class="' + phase.bg + ' px-5 py-3 rounded-t-xl phase-hdr" onclick="togglePhaseCollapse(\''+phase.id+'\')">'
+            + '<div class="flex items-center justify-between">'
+            + '<div class="min-w-0 flex-1">'
+            + '<h3 class="text-sm font-bold text-slate-800">' + phase.title + '</h3>'
+            + '<div class="flex flex-wrap items-center gap-2 mt-0.5">'
+            + '<span class="text-[10px] mono text-slate-500">' + phase.badge + '</span>'
+            + (resHTML ? '<span class="text-slate-300 text-xs">&middot;</span><span>' + resHTML + '</span>' : '')
+            + '</div></div>'
+            + '<div class="flex items-center gap-3 ml-3 flex-shrink-0">'
+            + '<div class="text-right"><span class="text-base font-bold mono" style="color:' + phase.accent + '">' + pct + '%</span>'
+            + '<div class="text-[10px] text-slate-400">' + doneCnt + '/' + totalCnt + '</div></div>'
+            + '<span class="text-slate-400 text-sm">' + (isCollapsed?'&#9658;':'&#9660;') + '</span>'
+            + '</div></div>'
+            + '<div class="prog-track mt-2"><div class="prog-fill" style="width:'+pct+'%;background:'+phase.accent+'"></div></div>'
+            + '</div>'
+            + '<div' + (isCollapsed?' style="display:none"':'') + '>' + topicsHTML + '</div>';
+        container.appendChild(card);
+    });
+    var oPct = totalAll ? Math.round(doneAll/totalAll*100) : 0;
+    document.getElementById('overall-pct').textContent  = oPct + '%';
+    document.getElementById('overall-bar').style.width  = oPct + '%';
+    renderWeekDeepDive();
+    renderHabitTracker();
+    renderQuickNote();
+}
+
+function togglePhaseCollapse(id) {
+    if (collapsedPhases.has(id)) collapsedPhases.delete(id); else collapsedPhases.add(id);
+    persist(); renderRoadmap();
+}
+
+function toggleTopic(id) {
+    var cur = false;
+    for (var pi=0; pi<PHASES.length; pi++) for (var ti=0; ti<PHASES[pi].topics.length; ti++) {
+        var t = PHASES[pi].topics[ti];
+        if (t.id===id) { cur = checkedTopics[id]!==undefined ? checkedTopics[id] : t.done; break; }
+    }
+    checkedTopics[id] = !cur;
+    persist(); renderRoadmap();
+}
+
+function renderWeekDeepDive() {
+    var w = WEEK_PLAN[currentWeek-1];
+    var dates = getWeekDates(currentWeek);
+    document.getElementById('week-deep-dive').innerHTML = ''
+        + '<div class="phase-card">'
+        + '<div class="bg-sky-50 px-5 py-3 rounded-t-xl flex items-center justify-between">'
+        + '<div><h3 class="text-sm font-bold text-slate-800">Week '+w.week+' Deep Dive - '+w.phase+'</h3>'
+        + '<p class="text-[10px] text-slate-500 mt-0.5">'+dates+'</p></div>'
+        + '<div class="flex items-center gap-1.5">'
+        + '<button onclick="changeWeek(-1)" class="w-6 h-6 rounded bg-white border border-slate-200 text-slate-600 text-xs font-bold flex items-center justify-center hover:bg-slate-50">&#8249;</button>'
+        + '<span class="text-[10px] mono text-slate-500">'+currentWeek+'/12</span>'
+        + '<button onclick="changeWeek(1)" class="w-6 h-6 rounded bg-white border border-slate-200 text-slate-600 text-xs font-bold flex items-center justify-center hover:bg-slate-50">&#8250;</button>'
+        + '</div></div>'
+        + '<div class="p-4 space-y-3">'
+        + '<div class="grid grid-cols-2 gap-3">'
+        + '<div class="bg-green-50  rounded-lg p-3"><p class="text-[10px] font-bold text-green-700  uppercase tracking-wide mb-1">freecodecamp the python certification</p><p class="text-xs text-slate-700">'+esc(w.bootdev)+'</p></div>'
+        + '<div class="bg-blue-50   rounded-lg p-3"><p class="text-[10px] font-bold text-blue-700   uppercase tracking-wide mb-1">CS50P</p><p class="text-xs text-slate-700">'+esc(w.cs50p)+'</p></div>'
+        + '<div class="bg-orange-50 rounded-lg p-3"><p class="text-[10px] font-bold text-orange-700 uppercase tracking-wide mb-1">LeetCode</p><p class="text-xs text-slate-700">'+esc(w.leetcode)+'</p></div>'
+        + '<div class="bg-purple-50 rounded-lg p-3"><p class="text-[10px] font-bold text-purple-700 uppercase tracking-wide mb-1">Project</p><p class="text-xs text-slate-700">'+esc(w.project)+'</p></div>'
+        + '</div>'
+        + '<div class="bg-amber-50 border border-amber-200 rounded-lg p-3">'
+        + '<p class="text-[10px] font-bold text-amber-700 uppercase tracking-wide mb-1">This Week\'s Tip</p>'
+        + '<p class="text-xs text-amber-800 italic">' + esc(w.tip) + '</p></div>'
+        + '</div></div>';
+}
+
+// ============================================================
+// FRIDAY CHECKS
+// ============================================================
+function renderFridayChecks() {
+    var wk = 'w'+currentWeek;
+    document.getElementById('friday-checks').innerHTML = FRIDAY_Q.map(function(q,i){
+        var key     = wk+'_'+i;
+        var checked = fridayChecks[key]||false;
+        return '<div class="topic-item">'
+             + '<div class="check-box ' + (checked?'done':'') + '" onclick="toggleFriday(\''+key+'\')" style="'+(checked?'background:#16a34a;border-color:#16a34a;':'')+'"><span style="color:white;font-size:10px;font-weight:bold">'+(checked?'&#10003;':'')+'</span></div>'
+             + '<span class="text-xs text-slate-700">'+esc(q)+'</span>'
+             + '</div>';
+    }).join('');
+}
+
+function toggleFriday(key) {
+    fridayChecks[key] = !fridayChecks[key];
+    persist(); renderFridayChecks();
+}
+
+// ============================================================
+// FILTER BAR
+// ============================================================
+function toggleFilter(type) {
+    if (type==='all') { activeFilters.clear(); activeFilters.add('all'); }
+    else {
+        activeFilters.delete('all');
+        activeFilters.has(type) ? activeFilters.delete(type) : activeFilters.add(type);
+        if (!activeFilters.size) activeFilters.add('all');
+    }
+    renderSessions();
+}
+
+function rebuildFilterBar() {
+    var bar   = document.getElementById('filter-bar');
+    var types = new Set(activeSessions.map(function(s){ return s.type; }));
+    ['Class','Study','Venture','Workout','Routine'].forEach(function(t){ types.add(t); });
+    var allOn = activeFilters.has('all');
+    var html  = '<span class="text-[10px] font-bold text-slate-400 uppercase tracking-widest mr-1">Filters</span>';
+    html += '<button onclick="toggleFilter(\'all\')" class="px-2.5 py-1 text-[10px] font-medium rounded-full transition-all '+(allOn?'bg-slate-800 text-white':'bg-white border border-slate-300 text-slate-600 hover:bg-slate-100')+'">All</button>';
+    Array.from(types).sort().forEach(function(t){
+        var on = activeFilters.has(t);
+        html += '<button onclick="toggleFilter(\''+t+'\')" class="px-2.5 py-1 text-[10px] font-medium rounded-full transition-all '+(on?'bg-slate-800 text-white':'bg-white border border-slate-300 text-slate-600 hover:bg-slate-100')+'">'+t+'</button>';
+    });
+    bar.innerHTML = html;
+}
+
+// ============================================================
+// MODAL
+// ============================================================
+function openModal(id) {
+    document.getElementById('session-form').reset();
+    document.getElementById('inp-id').value = '';
+    var del = document.getElementById('btn-delete');
+    if (id) {
+        var s = activeSessions.find(function(x){ return x.id===id; });
+        if (!s) return;
+        document.getElementById('modal-title').textContent = 'Edit Session';
+        document.getElementById('inp-id').value    = s.id;
+        document.getElementById('inp-title').value = s.title;
+        document.getElementById('inp-desc').value  = s.details;
+        document.getElementById('inp-day').value   = s.day;
+        document.getElementById('inp-type').value  = s.type;
+        document.getElementById('inp-start').value = decToTime(s.start);
+        document.getElementById('inp-end').value   = decToTime(s.end);
+        del.classList.remove('hidden');
+    } else {
+        document.getElementById('modal-title').textContent = 'New Session';
+        del.classList.add('hidden');
+    }
+    document.getElementById('modal-overlay').classList.remove('hidden');
+}
+
+function closeModal() { document.getElementById('modal-overlay').classList.add('hidden'); }
+
+function saveSession(e) {
+    e.preventDefault();
+    var idVal = document.getElementById('inp-id').value;
+    var sess = {
+        id:      idVal ? parseInt(idVal) : Date.now(),
+        title:   document.getElementById('inp-title').value,
+        details: document.getElementById('inp-desc').value,
+        day:     document.getElementById('inp-day').value,
+        type:    document.getElementById('inp-type').value,
+        start:   timeToDec(document.getElementById('inp-start').value),
+        end:     timeToDec(document.getElementById('inp-end').value),
+    };
+    if (idVal) {
+        var idx = customSessions.findIndex(function(x){ return x.id==idVal; });
+        idx!==-1 ? customSessions[idx]=sess : customSessions.push(sess);
+    } else { customSessions.push(sess); }
+    rebuildActiveSessions(); renderSessions(); persist(); closeModal();
+}
+
+function deleteSession() {
+    if (!confirm('Delete this session?')) return;
+    var id = document.getElementById('inp-id').value;
+    customSessions = customSessions.filter(function(x){ return x.id!=id; });
+    rebuildActiveSessions(); renderSessions(); persist(); closeModal();
+}
+
+function resetData() {
+    if (!confirm('Reset all progress, habits, custom sessions, and notes?')) return;
+    localStorage.removeItem('lifeos_v5'); location.reload();
+}
+
+init();
+</script>
+</body>
+</html>

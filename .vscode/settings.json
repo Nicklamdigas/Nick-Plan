@@ -1,0 +1,31 @@
+{
+  // Disable GitHub Copilot inline suggestions
+  "github.copilot.enable": {
+    "*": false,
+    "plaintext": false,
+    "markdown": false,
+    "scminput": false
+  },
+  
+  // Keep regular IntelliSense/autocomplete enabled
+  "editor.quickSuggestions": {
+    "other": true,
+    "comments": false,
+    "strings": false
+  },
+  
+  // Show autocomplete automatically
+  "editor.suggestOnTriggerCharacters": true,
+  
+  // Enable parameter hints
+  "editor.parameterHints.enabled": true,
+  
+  // Python-specific IntelliSense (Pylance)
+  "python.languageServer": "Pylance",
+  
+  // Show method/function signatures
+  "editor.suggest.showMethods": true,
+  "editor.suggest.showFunctions": true,
+  "editor.suggest.showVariables": true,
+  "editor.suggest.showKeywords": true
+}

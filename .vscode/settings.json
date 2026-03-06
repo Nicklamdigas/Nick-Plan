@@ -27,5 +27,28 @@
   "editor.suggest.showMethods": true,
   "editor.suggest.showFunctions": true,
   "editor.suggest.showVariables": true,
-  "editor.suggest.showKeywords": true
+  "editor.suggest.showKeywords": true,
+  
+  // AUTO-CLOSING PAIRS (quotes, brackets, tags, etc.)
+  "editor.autoClosingBrackets": "always",
+  "editor.autoClosingQuotes": "always",
+  "editor.autoClosingDelete": "always",
+  "editor.autoClosingOvertype": "always",
+  
+  // Auto-surround selection
+  "editor.autoSurround": "languageDefined",
+  
+  // Bracket pair colorization
+  "editor.bracketPairColorization.enabled": true,
+  
+  // Better autocomplete behavior
+  "editor.acceptSuggestionOnCommitCharacter": true,
+  "editor.acceptSuggestionOnEnter": "on",
+  "editor.tabCompletion": "on",
+  
+  // Word-based suggestions
+  "editor.wordBasedSuggestions": "matchingDocuments",
+  
+  // PREVENT AUTO-ACTIVATION OF VENV IN TERMINAL
+  "python.terminal.activateEnvironment": false
 }

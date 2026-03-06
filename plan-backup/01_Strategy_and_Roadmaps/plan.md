@@ -40,6 +40,32 @@ Before anything else, internalize these rules. Break them consciously and you sa
 4. **Read the error message yourself first.** Before asking AI, spend 5 minutes with the error. Google it. Try to fix it. Then ask.
 5. **Comment your own code before AI reviews it.** Writing comments forces you to understand what you wrote.
 6. **Rebuild before you refactor.** Take your vibecoded school app and rebuild it from scratch — understanding every line. This is your first real project.
+7. **Linux-First Development.** You are now on Linux. Stop using Windows paths (`C:\...`). Use `/home/lamdigas/Code/`. Learn the terminal commands (`ls`, `cd`, `mkdir`, `chmod`) because you will need them for deployment.
+8. **Testing is Documentation.** A project isn't "done" just because it runs. It's done when you have written a test that proves it works. No more "vibecoding" without verification.
+
+---
+
+## Strategic Upgrades (2026 Revision)
+
+### 1. Linux Migration & Mastery
+Since you are working on a Linux environment, your "Learn Linux" task from Phase 1 is now **Priority #1**. 
+*   **Action:** All projects must be stored in `/home/lamdigas/Code/Projects/`.
+*   **Skill:** You must learn to manage processes using `systemctl` and `ps`, as your automation scripts will eventually run as background services (daemons).
+
+### 2. The "Safety Net" Testing Strategy
+In Phase 1, you will not just build projects; you will test them.
+*   **Requirement:** For the CLI Task Manager, you must write a `tests.py` file using `pytest`. 
+*   **Goal:** Prove that if you add a task, it actually appears in the `tasks.json` file without you having to open the file manually.
+
+### 3. Project Reconstruction (The "Academic Automator" Audit)
+Your existing `academic_automator` is your first "real world" codebase. 
+*   **Action:** Instead of just starting a new project, your first task in Phase 1 is to run a linter (like `ruff`) on your existing code. 
+*   **Goal:** Fix every "red squiggly" and warning. This will teach you the difference between "code that works" and "professional code."
+
+### 4. Database Evolution: PostgreSQL
+The plan mentions MySQL, but the industry standard for Python/Django is **PostgreSQL**.
+*   **Action:** In Phase 3, you will learn to use Docker to run a PostgreSQL database. 
+*   **Goal:** Migrating from MySQL to Postgres is a "Senior" level understanding of how data works. It makes you significantly more hireable.
 
 ---
 
@@ -375,18 +401,42 @@ This is your landing pad. It is NOT a permanent label. It is the niche that:
 
 ---
 
-## Weekly Schedule Template (Break Period — 8 hrs/day)
+## Weekly Schedule Template (Aligned with Life OS v5.1)
 
-| Time | Activity |
-|------|----------|
-| 8:00–9:00 | freecodecamp the python certification course (1 chapter minimum) |
-| 9:00–11:00 | CS50P problem set or LeetCode (write on paper first) |
-| 11:00–13:00 | Project work (Phase project — no AI for core logic) |
-| 13:00–14:00 | Break + lunch |
-| 14:00–16:00 | Continue project OR start build-your-own-x exercise |
-| 16:00–17:00 | Review today's code, write dev-journal entry, commit to GitHub |
-| 17:00–18:00 | Read tech articles, engage on LinkedIn/Twitter/Discord |
-| 18:00+ | Rest. Seriously. Don't code past exhaustion. |
+| Time | Block Name | Focus / Expectation |
+|------|------------|---------------------|
+| **08:00 – 09:00** | **freecodecamp the python certification** | **Input Phase.** Complete at least 1 chapter. Write every exercise yourself. No AI. |
+| **09:00 – 11:00** | **CS50P / LeetCode** | **Logic Phase.** Solve 3-5 LeetCode Easys. Write the solution on paper before typing. |
+| **11:00 – 13:00** | **Project Build** | **Implementation Phase.** Build your Phase Projects (Task Manager, etc.). No AI for core logic. |
+| **13:00 – 14:00** | **Break / Lunch** | **Rest.** Step away from the screen entirely. |
+| **14:00 – 16:00** | **Deep Work** | **Specialization.** Work on `build-your-own-x` (Shell/Web Server) or advanced features for your projects. |
+| **16:00 – 17:00** | **Review + Dev Journal** | **Reflection.** Reflect on what you learned, commit your code to GitHub, and write your journal entry. |
+| **17:00 – 18:00** | **Networking** | **Exposure.** Engage with #KeTech on Twitter, LinkedIn, or Discord. Learn what the industry is talking about. |
+
+---
+
+## Detailed Block Explanations (What is expected of you?)
+
+### 🧱 Project Build Block (11:00 – 13:00)
+**The Goal:** Translate your knowledge into working software.
+*   **Expectation:** You are building the specific projects listed in Phase 1, 2, or 3. 
+*   **Behavior:** Start with a blank file. Define your functions first. If you need to "Add a task," write the function `def add_task(title):` and try to figure out how to append it to a list. 
+*   **AI Usage:** Only ask for syntax (e.g., "How do I append to a JSON file?"). Never ask for the whole script.
+
+### 🧠 CS50P / LeetCode Block (09:00 – 11:00)
+**The Goal:** Sharpen your problem-solving brain.
+*   **Expectation:** Complete the weekly CS50P lecture and problem set. On non-CS50 days, do LeetCode.
+*   **Behavior:** Use a physical notebook. Draw the flow of the data. If it's a "Reverse a String" problem, write the steps 1, 2, 3 in English before you write `for i in range...`.
+
+### 🚀 Deep Work Block (14:00 – 16:00)
+**The Goal:** Exploration and "Hard" things.
+*   **Expectation:** This is for the `build-your-own-x` series or fixing complex bugs you couldn't solve during the Project Build block. 
+*   **Behavior:** This is where you go "under the hood." If you're building a Web Server, you're learning about TCP/IP and Sockets. This is the most mentally taxing block.
+
+### 📝 Review + Dev Journal (16:00 – 17:00)
+**The Goal:** Finalize and Document.
+*   **Expectation:** Every single line of code you wrote today MUST be committed to GitHub. 
+*   **Behavior:** Write a meaningful commit message (e.g., "feat: add delete functionality to task manager"). Write your entry in the `dev-journal` repo. If you don't commit, the day didn't happen.
 
 ---
 

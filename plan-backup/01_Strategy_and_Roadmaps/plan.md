@@ -128,9 +128,11 @@ Everything in this phase is already complete:
 🔗 Link: https://www.freecodecamp.org/learn/scientific-computing-with-python/
 
 ### Supplementary: CS50P (Harvard, free)
-Do the problem sets **yourself, no AI, before looking at hints.**
-- 🔗 https://cs50.harvard.edu/python/2022/
-- Complete all 10 weeks — each problem set reinforces a freecodecamp the python certification concept
+**Strategy: PSet-First / No Lectures.** 
+*   **The Workflow:** Go straight to the Problem Set (PSet). Read the requirements.
+*   **The Resource:** Use the [CS50P Notes](https://cs50.harvard.edu/python/2022/notes/) and "Shorts" for syntax.
+*   **The Goal:** Use official Python Documentation to solve blocks. If you can solve the PSet, you have mastered the week. Move on immediately.
+*   Complete all 10 weeks — each problem set reinforces a freecodecamp the python certification concept.
 
 ### LeetCode Practice
 - Week 1-2: 3 Easy/day (arrays, strings) — https://leetcode.com/problemset/?difficulty=EASY

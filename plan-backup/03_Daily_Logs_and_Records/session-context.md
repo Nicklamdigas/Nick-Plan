@@ -77,25 +77,25 @@ Has been using AI to write all his code without understanding it. Wants to actua
 
 ---
 
-## Workspace Structure (at C:\Nick)
+## Workspace Structure (at /home/lamdigas/Nick/Nick Plan/)
 
 ```
-C:\Nick\
-├── career-plan\
-│   ├── plan.md                    ← full 12-week learning plan
-│   ├── git-cheatsheet.md          ← daily Git reference
-│   └── git-identity-setup.md     ← git config instructions (done)
-├── storage-cleanup\
-│   └── dupeguru-guide.md          ← safe duplicate cleanup guide
-└── projects\
-    ├── README.md
-    ├── dev-journal\               ← LIVE on GitHub ✅
-    │   ├── README.md
-    │   ├── 2026-02-24.md          ← Day 1 journal entry
-    │   └── push-to-github.ps1
-    ├── phase1-python\             ← for Phase 1 projects
-    ├── phase2-web\                ← for Phase 2 projects
-    └── phase3-backend\            ← for Phase 3 projects
+/home/lamdigas/Nick/Nick Plan/
+├── life_os_v4.html                ← life OS dashboard
+├── plan-backup/
+│   ├── 01_Strategy_and_Roadmaps/
+│   │   ├── plan.md                ← full 12-week learning plan
+│   │   └── life_os_v5.1.html      ← life OS v5.1 dashboard
+│   ├── 02_Learning_Progress/
+│   │   ├── CS50P/                 ← CS50P problem sets
+│   │   └── freecodecamp/          ← freeCodeCamp Python files
+│   ├── 03_Daily_Logs_and_Records/
+│   │   ├── dev-journal/           ← Daily journal entries
+│   │   ├── session-context.md     ← THIS FILE
+│   │   └── session-records/       ← Checkpoints and plans
+│   └── 04_Guides_and_Tools/
+│       ├── git-cheatsheet.md
+│       └── git-identity-setup.md
 ```
 
 ---
@@ -105,7 +105,7 @@ C:\Nick\
 | Repo | URL | Status |
 |------|-----|--------|
 | dev-journal | https://github.com/Nicklamdigas/dev-journal | ✅ Private, live |
-| school-automation-app | https://github.com/Nicklamdigas/school-automation-app | ⏳ To be created |
+| Nick-Plan | https://github.com/Nicklamdigas/Nick-Plan | ✅ Private, live |
 
 ---
 
@@ -117,11 +117,13 @@ C:\Nick\
 | Set up dev environment (VS Code, Python, Git, extensions) | ✅ DONE |
 | Learn Git & GitHub workflow (clone, add, commit, push) | ✅ DONE |
 | Create dev journal on GitHub | ✅ DONE |
-| Rebuild vibecoded school app from scratch | ⏳ IN PROGRESS — need to clone app from Ubuntu first |
+| Linux Migration (Move from Windows to Ubuntu) | ✅ DONE |
 
 ### Phase 1: Python Deep Mastery (Week 2–5)
-- CS50P course, OOP, algorithms, 10 LeetCode Easy/week
-- 3 projects: CLI Task Manager, Grade Calculator, Web Scraper
+- **CS50P:** Week 0 Completed ✅ | Week 1 In Progress (3/5 done) 🔄
+- **freeCodeCamp:** Strings & Variables Completed ✅ | Numbers In Progress 🔄
+- **LeetCode:** Started Easy problems 🔄
+- **Projects:** CLI Task Manager (Skeleton ready) 🔄
 
 ### Phase 2: Web Development (Week 5–8)
 - HTML/CSS deeper, Vanilla JS, Django basics
@@ -147,26 +149,33 @@ C:\Nick\
 
 ## WHERE WE STOPPED (RESUME HERE)
 
-**Session date:** February 25, 2026
+**Session date:** March 19, 2026
 
 **What was done in this session:**
-- Nick initiated "Independence Mode."
-- Established new workflow: Nick is the driver; AI is the Senior Reviewer.
-- Set up Weekly Sprint Review protocol (Code receipts + Journal + Friday Check-in).
-- Nick is starting Phase 1, Week 1 immediately.
+- Verified Linux migration is complete.
+- Audited CS50P progress: Week 0 done, Week 1 (bank, deep) done.
+- Audited freeCodeCamp progress: Strings and Variables done.
+- Updated all tracking files and Life OS to reflect March 19th reality.
 
 **Current project state:**
-- `academic_automator` is cloned and on Windows at `C:\Nick\projects\academic_automator`
-- `dev-journal` is live on GitHub (Day 1 journal entry complete).
-- Life OS v5.1 is the active project manager for Nick's schedule and roadmap.
+- Nick is in the middle of CS50P Week 1.
+- `extensions.py` is the current active task.
+- `dev-journal` is updated with a March 19 entry.
 
-**Decided direction:** Total independence. Start Phase 1 structured learning FIRST (freecodecamp the python certification + CS50P + LeetCode).
+**Decided direction:** Complete CS50P Week 1 today/tomorrow. Move to Week 2 (Loops) by the weekend.
 
 **Immediate next step:**
-1. Use Life OS v5.1 to manage the daily schedule.
-2. Complete freecodecamp the python certification Course 1: Learn Python (Chapters 1-5).
-3. Complete CS50P Week 0-1.
-4. Return for a Weekly Review once Week 1 goals are hit.
+1. Finish `extensions.py` (CS50P Week 1).
+2. Complete `coke.py` or other Week 1 problems.
+3. Start freeCodeCamp "Numbers" module.
+
+---
+
+## How to Resume This Session
+
+If conversation context is lost, paste this into a new session:
+
+> "Hi, I'm Nick. Please read /home/lamdigas/Nick/Nick Plan/plan-backup/03_Daily_Logs_and_Records/session-context.md and resume exactly where we left off."
 
 ---
 

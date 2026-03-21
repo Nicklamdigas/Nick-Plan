@@ -95,7 +95,7 @@ Everything in this phase is already complete:
 - ✅ VS Code + Python + Git + extensions installed
 - ✅ Git config set (name, email, VS Code as editor)
 - ✅ `dev-journal` repo live on GitHub
-- ✅ `academic_automator` cloned to `C:\Nick\projects\`
+- ✅ `academic_automator` cloned to `/home/lamdigas/Nick/Nick Plan/plan-backup/02_Learning_Progress/`
 - ✅ GitHub profile exists (Nicklamdigas)
 
 **One remaining task:** Set up your GitHub Profile README (pinned to your profile page)
@@ -148,13 +148,13 @@ Everything in this phase is already complete:
 ### Phase 1 Projects (build all three — no AI writing the logic)
 1. **CLI Task Manager** — `add`, `done`, `list`, `delete` commands, saved to `tasks.json`
    - Must handle: empty list, duplicate tasks, invalid input
-   - Folder: `C:\Nick\projects\phase1-python\task-manager\`
+   - Folder: `/home/lamdigas/Nick/Nick Plan/plan-backup/02_Learning_Progress/phase1-python/task-manager\`
 2. **Student Grade Calculator** — reads a CSV of student names + marks, outputs averages, pass/fail
    - Must use: functions, file I/O, dictionaries, error handling
-   - Folder: `C:\Nick\projects\phase1-python\grade-calculator\`
+   - Folder: `/home/lamdigas/Nick/Nick Plan/plan-backup/02_Learning_Progress/phase1-python/grade-calculator\`
 3. **Web Scraper** — scrapes headlines from a real news site (e.g., Nation.Africa) using `requests` + `BeautifulSoup`
    - Saves output to a JSON file, runs from CLI with a `--url` argument
-   - Folder: `C:\Nick\projects\phase1-python\web-scraper\`
+   - Folder: `/home/lamdigas/Nick/Nick Plan/plan-backup/02_Learning_Progress/phase1-python/web-scraper\`
 
 ### Key Concepts Checklist (from `python.pdf` + `computer-science.pdf`)
 Before moving to Phase 2, you must be able to do these WITHOUT looking them up:
@@ -203,10 +203,10 @@ Before moving to Phase 2, you must be able to do these WITHOUT looking them up:
    - Fully responsive (works on mobile)
    - Sections: About, Skills, Projects (link to GitHub), Contact
    - Deploy on GitHub Pages (free): https://pages.github.com/
-   - Folder: `C:\Nick\projects\phase2-web\portfolio\`
+   - Folder: `/home/lamdigas/Nick/Nick Plan/plan-backup/02_Learning_Progress/phase2-web\portfolio\`
 2. **Django Blog App** — full CRUD (create/read/update/delete posts), user registration + login, MySQL database
    - Must have: login required to create/edit, public can read, pagination
-   - Folder: `C:\Nick\projects\phase2-web\django-blog\`
+   - Folder: `/home/lamdigas/Nick/Nick Plan/plan-backup/02_Learning_Progress/phase2-web\django-blog\`
 
 ---
 
@@ -285,7 +285,7 @@ This is your **main portfolio project** — the one that gets you interviews.
 6. Write at least basic tests for the API
 7. Deploy
 
-**Folder:** `C:\Nick\projects\phase3-backend\school-management\`
+**Folder:** `/home/lamdigas/Nick/Nick Plan/plan-backup/02_Learning_Progress/phase3-backend\school-management\`
 
 ---
 

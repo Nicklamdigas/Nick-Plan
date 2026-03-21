@@ -9,13 +9,13 @@ In this session we are **rewriting and upgrading that plan** to incorporate:
 - Free resources mapped to each topic/phase
 - Keeping the anti-AI-crutch rules that were already agreed
 
-## Current State (as of this session)
-- ✅ Dev environment ready (Python 3.13, VS Code, Git, extensions)
-- ✅ dev-journal live on GitHub
-- ✅ academic_automator cloned to `C:\Nick\projects\academic_automator`
-- ✅ Academic Link system documented (`Academic_Link.md`) — Flask + Flutter + Firebase
-- ⏳ Phase 1 structured learning (CS50P, LeetCode, CLI projects) NOT yet started
-- ➕ NEW: freecodecamp the python certification and build-your-own-x added to resources
+## Current State (as of March 19, 2026)
+- ✅ Linux Migration Complete (All work in `/home/lamdigas/Nick/Nick Plan/`)
+- ✅ dev-journal live on GitHub (March 19 entry added)
+- ✅ CS50P: Week 0 done, Week 1 in progress (3/5 problems done)
+- ✅ freeCodeCamp: Strings & Variables done
+- 🔄 Phase 1 Projects: CLI Task Manager skeleton ready
+- 🔄 Roadmap: Ticking off Week 1 content, approaching Week 2 (Loops)
 
 ## Roadmaps Analyzed (from PDFs)
 | PDF | Core Topics |

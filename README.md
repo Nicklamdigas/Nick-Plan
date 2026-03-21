@@ -201,15 +201,15 @@ nano plan-backup/session-records/session-plan.md
 
 ## 🎓 Current Learning Focus
 
-**Phase (as of Feb 26, 2026):**
-- Starting freeCodeCamp Python certification
-- Core: Understanding Variables and Data Types
-- Objective: Build foundation for full-stack development
+**Phase (as of March 19, 2026):**
+- **CS50P (Week 1):** `bank.py` and `deep.py` completed. Working on `extensions.py`.
+- **freeCodeCamp:** Strings and Variables modules completed. Starting "Numbers".
+- **Environment:** Successfully migrated to Linux (Ubuntu).
 
 **Next Steps:**
-- Complete Python fundamentals course
-- Begin algorithms & data structures
-- Start first real project (rebuild school automation app)
+- Complete CS50P Week 1 (Conditionals).
+- Begin CS50P Week 2 (Loops).
+- Start implementing CLI Task Manager logic.
 
 ---
 

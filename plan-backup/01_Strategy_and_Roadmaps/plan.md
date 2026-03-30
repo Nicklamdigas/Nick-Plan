@@ -69,6 +69,45 @@ The plan mentions MySQL, but the industry standard for Python/Django is **Postgr
 
 ---
 
+## The "April Sprint": Final Pre-load (April 1 – April 30)
+
+This is a high-intensity 4-week block designed to maximize your head start before Zetech resumes. We are merging your Career Roadmap with your 7 Academic Units.
+
+### Weekly Heavy Rotation (Afternoons & Evenings)
+
+| Day | Unit of the Day | Focus |
+|:---|:---|:---|
+| **Monday** | **Simulation & Modeling** | Python math simulations and logic flows. |
+| **Tuesday** | **Mobile Programming 1** | Flutter/React Native foundations. |
+| **Wednesday**| **Distributed Computing** | System Design, CAP Theorem, Architecture. |
+| **Thursday** | **Internet Programming 1** | HTML/CSS/JS and DOM manipulation. |
+| **Friday** | **Network Engineering** | Linux networking, SSH, and protocols. |
+| **Saturday** | **Configuration Management**| Git mastery, Docker, and Environments. |
+| **Sunday** | **Visual Programming** | OOP Principles and Logic patterns. |
+
+### April Sprint Milestones
+*   **CS50P:** Complete Weeks 2, 3, and 4 (Loops, Exceptions, Libraries).
+*   **fcc:** Complete "Python Strings" and "Logic" modules.
+*   **Project:** Upgrade To-Do App to v1.2 (Done status + JSON storage).
+*   **Academic:** Read the first 3 chapters of every Zetech unit syllabus.
+
+---
+
+## Phase 5: The Academic Term Transition (May – August)
+
+When school resumes, we switch from "Full-Time Learning" to **"Implementation & GPA Dominance."**
+
+*   **Schedule Change:** Your morning blocks (08:00 – 11:00) will be replaced by campus classes.
+*   **The Partnership:** We will use our evening blocks (19:00 – 21:00) to:
+    1.  Review your daily lectures.
+    2.  Use Python to solve your assignments (where allowed).
+    3.  Continue the Roadmap projects at a slower, sustainable pace.
+*   **Goal:** Use the skills you built in your break to finish your school projects in 50% of the time your classmates take.
+
+---
+
+---
+
 ---
 
 ## Roadmap Overview — Priority Order for Your Niche
@@ -403,17 +442,18 @@ This is your landing pad. It is NOT a permanent label. It is the niche that:
 
 ---
 
-## Weekly Schedule Template (Aligned with Life OS v5.1)
+## Weekly Schedule Template (Integrated Zetech Prep)
 
 | Time | Block Name | Focus / Expectation |
 |------|------------|---------------------|
-| **08:00 – 09:00** | **freecodecamp the python certification** | **Input Phase.** Complete at least 1 chapter. Write every exercise yourself. No AI. |
-| **09:00 – 11:00** | **CS50P / LeetCode** | **Logic Phase.** Solve 3-5 LeetCode Easys. Write the solution on paper before typing. |
-| **11:00 – 13:00** | **Project Build** | **Implementation Phase.** Build your Phase Projects (Task Manager, etc.). No AI for core logic. |
-| **13:00 – 14:00** | **Break / Lunch** | **Rest.** Step away from the screen entirely. |
-| **14:00 – 16:00** | **Deep Work** | **Specialization.** Work on `build-your-own-x` (Shell/Web Server) or advanced features for your projects. |
-| **16:00 – 17:00** | **Review + Dev Journal** | **Reflection.** Reflect on what you learned, commit your code to GitHub, and write your journal entry. |
-| **17:00 – 18:00** | **Networking** | **Exposure.** Engage with #KeTech on Twitter, LinkedIn, or Discord. Learn what the industry is talking about. |
+| **08:00 – 09:00** | **freeCodeCamp** | **Input Phase.** Python Certification + **Internet Programming 1** (HTML/CSS). |
+| **09:00 – 11:00** | **CS50P / LeetCode** | **Logic Phase.** Problem solving + **Visual Programming** logic patterns. |
+| **11:00 – 13:00** | **Project Build** | **Implementation.** To-Do App, School System, or **Mobile Programming 1** proto. |
+| **13:00 – 14:00** | **Break / Lunch** | **Rest.** Mandatory screen break. |
+| **14:00 – 16:00** | **Academic Deep Work** | **Systems.** **Distributed Computing**, **Network Engineering**, or Modeling. |
+| **16:00 – 17:00** | **Review + Journal** | **Reflection.** Commit code, write `dev-journal`, track streaks. |
+| **17:00 – 19:00** | **Personal Time** | **Rest.** Exercise, dinner, family. |
+| **19:00 – 21:00** | **Evening Growth** | **Specialization.** Pre-load Zetech units, tech blogs, or **Mobile Dev**. |
 
 ---
 

@@ -20,7 +20,7 @@
 | Diploma | Business Information Technology |
 | Break | On break until May (medical — fully recovered) |
 | GitHub username | Nicklamdigas |
-| Windows username | lamdi |
+| OS | Linux (Ubuntu) |
 | Tools | GitHub Pro (Student Pack), GitHub Copilot CLI |
 
 ### Tech he already knows
@@ -48,35 +48,6 @@ Has been using AI to write all his code without understanding it. Wants to actua
 
 ---
 
-## Machine Setup (DONE)
-
-| Tool | Version | Status |
-|------|---------|--------|
-| Python | 3.13.1 | ✅ Installed |
-| pip | 25.3 | ✅ Working |
-| VS Code | 1.109.5 | ✅ Installed, in PATH |
-| Git | 2.52 | ✅ Installed, configured |
-| Git username | Nicholas (confirmed) | ✅ |
-| Git email | Nick's GitHub email (confirmed) | ✅ |
-
-### VS Code Extensions Installed
-- ms-python.python (official Python)
-- ms-python.pylint (linter)
-- ms-python.black-formatter (formatter)
-- ms-python.debugpy (debugger)
-- eamodio.gitlens (git superpowers)
-- esbenp.prettier-vscode (formatter)
-- pkief.material-icon-theme (icons)
-- formulahendry.code-runner (run code with one click)
-
-### Git Global Config Set
-- core.autocrlf = true
-- init.defaultBranch = main
-- core.editor = VS Code
-- pull.rebase = false
-
----
-
 ## Workspace Structure (at /home/lamdigas/Nick/Nick Plan/)
 
 ```
@@ -84,15 +55,17 @@ Has been using AI to write all his code without understanding it. Wants to actua
 ├── life_os_v4.html                ← life OS dashboard
 ├── plan-backup/
 │   ├── 01_Strategy_and_Roadmaps/
-│   │   ├── plan.md                ← full 12-week learning plan
-│   │   └── life_os_v5.1.html      ← life OS v5.1 dashboard
+│   │   ├── plan.md                ← full 12-week learning plan (Updated with Zetech Units)
+│   │   ├── roadmaps/              ← Specialized PDF roadmaps
+│   │   └── life_os_v5.1.html      ← life OS v5.1 dashboard (Updated with Zetech Units)
 │   ├── 02_Learning_Progress/
-│   │   ├── CS50P/                 ← CS50P problem sets
-│   │   └── freecodecamp/          ← freeCodeCamp Python files
+│   │   ├── CS50P/                 ← CS50P problem sets (Week 0-2)
+│   │   ├── freecodecamp/          ← freeCodeCamp Python files
+│   │   └── Personal_Projects/     ← CLI To-Do App and other builds
 │   ├── 03_Daily_Logs_and_Records/
-│   │   ├── dev-journal/           ← Daily journal entries
+│   │   ├── dev-journal/           ← Daily journal entries (Updated to March 30, 2026)
 │   │   ├── session-context.md     ← THIS FILE
-│   │   └── session-records/       ← Checkpoints and plans
+│   │   └── session-records/       ← Checkpoints 001-004
 │   └── 04_Guides_and_Tools/
 │       ├── git-cheatsheet.md
 │       └── git-identity-setup.md
@@ -111,30 +84,23 @@ Has been using AI to write all his code without understanding it. Wants to actua
 
 ## 12-Week Plan — Phase Progress
 
-### Phase 0: Foundations & Mindset Reset (Week 1–2)
-| Task | Status |
-|------|--------|
-| Set up dev environment (VS Code, Python, Git, extensions) | ✅ DONE |
-| Learn Git & GitHub workflow (clone, add, commit, push) | ✅ DONE |
-| Create dev journal on GitHub | ✅ DONE |
-| Linux Migration (Move from Windows to Ubuntu) | ✅ DONE |
+### Phase 0: Environment + Reset (DONE) ✅
+- Linux (Ubuntu) migration complete. Git/VS Code configured correctly.
 
-### Phase 1: Python Deep Mastery (Week 2–5)
-- **CS50P:** Week 0 Completed ✅ | Week 1 In Progress (3/5 done) 🔄
-- **freeCodeCamp:** Strings & Variables Completed ✅ | Numbers In Progress 🔄
-- **LeetCode:** Started Easy problems 🔄
-- **Projects:** CLI Task Manager (Skeleton ready) 🔄
+### Phase 1: Python Deep Mastery (Week 2–5) 🔄
+- **CS50P:** Week 0 Completed ✅ | Week 1 Completed ✅ | Week 2 In Progress (Loops) 🔄
+- **freeCodeCamp:** Strings & Variables Completed ✅ | Numbers & Logic In Progress 🔄
+- **Projects:** CLI To-Do App (v1.1 Persistent logic complete) ✅
 
-### Phase 2: Web Development (Week 5–8)
-- HTML/CSS deeper, Vanilla JS, Django basics
-- Projects: Portfolio website, Django Blog
-
-### Phase 3: Backend + Database (Week 8–11)
-- MySQL advanced, Django REST Framework, JWT, Docker, deployment
-- Flagship project: Full-Stack School Management System
-
-### Phase 4: Portfolio & Job Prep (Week 11–12+)
-- Polish GitHub, write CV, LinkedIn, networking, internship applications
+### Zetech Academic Integration (STRATEGIC PIVOT) 🎯
+As of March 30, the plan is now "Integrated" with Zetech Year 3 Sem 1 units:
+1. **Internet Programming 1**: Pre-loading in Phase 2.
+2. **Configuration Mgmt**: Pre-loading in Phase 3/4.
+3. **Network Engineering**: Pre-loading in Phase 3.
+4. **Dist. Computing**: Pre-loading in Phase 4.
+5. **Visual Programming**: Pre-loading via OOP in Phase 1-2.
+6. **Simulation & Modeling**: Pre-loading in Deep Work.
+7. **Mobile Programming 1**: Pre-loading in Phase 5 / Evening Growth.
 
 ---
 
@@ -149,25 +115,27 @@ Has been using AI to write all his code without understanding it. Wants to actua
 
 ## WHERE WE STOPPED (RESUME HERE)
 
-**Session date:** March 19, 2026
+**Session date:** March 30, 2026
 
 **What was done in this session:**
-- Verified Linux migration is complete.
-- Audited CS50P progress: Week 0 done, Week 1 (bank, deep) done.
-- Audited freeCodeCamp progress: Strings and Variables done.
-- Updated all tracking files and Life OS to reflect March 19th reality.
+- **Month 1 Review:** Verified transformation from "prompter" to independent developer.
+- **Academic Pivot:** Integrated 7 Zetech units into `plan.md` and `life_os_v5.1.html`.
+- **Logic Progress:** Advanced in CS50P Week 2 (`camel.py` logic finalized).
+- **Project Progress:** `todo.py` v1.1 is working and persistent.
+- **System Documentation:** Created `checkpoint-004.md` and updated all tracking files.
 
 **Current project state:**
-- Nick is in the middle of CS50P Week 1.
-- `extensions.py` is the current active task.
-- `dev-journal` is updated with a March 19 entry.
+- Nick is starting **CS50P Week 2**. `camel.py` is the current task.
+- `todo.py` v1.1 is finished (reads/writes to `tasks.txt`).
 
-**Decided direction:** Complete CS50P Week 1 today/tomorrow. Move to Week 2 (Loops) by the weekend.
+**Decided direction:** 
+- Finish `camel.py` today.
+- Maintain the new **"Integrated"** schedule: Career Core (Morning), Academic Deep Work (Afternoon), Specialization (Evening).
 
 **Immediate next step:**
-1. Finish `extensions.py` (CS50P Week 1).
-2. Complete `coke.py` or other Week 1 problems.
-3. Start freeCodeCamp "Numbers" module.
+1. Fix the `print` statement indentation in `camel.py`.
+2. Run `camel.py` to verify the logic.
+3. Commit all changes to GitHub.
 
 ---
 
@@ -179,21 +147,9 @@ If conversation context is lost, paste this into a new session:
 
 ---
 
-## How to Resume This Session
-
-If conversation context is lost, paste this into a new session:
-
-> "Hi, I'm Nick. Please read C:\Nick\career-plan\session-context.md and resume exactly where we left off."
-
----
-
 ## Notes & Personality
-- Nick is motivated but has been held back by over-relying on AI
-- He responds well to practical hands-on tasks, not just theory
-- He is based in Nairobi, Kenya — keep networking/job advice Kenya-relevant
-- He has a Business IT diploma which is an advantage for freelancing
+- Nick is highly motivated but prone to burnout spikes; use the "Non-Zero Day" strategy.
+- He is the leader of his family; financial success is his primary driver.
 - **Independence Mode (MANDATORY):** Do not offer to manage his schedule or write code from scratch. Nick is now self-sufficient.
-- **Role:** You are the Technical Lead/Senior Engineer. Your job is to perform harsh code reviews, explain complex concepts, and guide him through blockers he has already attempted to fix.
-- **Weekly Sprint Review:** Every week, Nick will provide his code, journal, and Friday Check-in. Judge his progress strictly and adjust the roadmap in `plan.md` or `life_os_v5.1.html` only after he has proven mastery of the current phase.
 - Be direct and concise — no fluff
 - Always have him write code first, then review/guide.

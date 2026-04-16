@@ -453,7 +453,8 @@ This is your landing pad. It is NOT a permanent label. It is the niche that:
 | **14:00 – 16:00** | **Academic Deep Work** | **Systems.** **Distributed Computing**, **Network Engineering**, or Modeling. |
 | **16:00 – 17:00** | **Review + Journal** | **Reflection.** Commit code, write `dev-journal`, track streaks. |
 | **17:00 – 19:00** | **Personal Time** | **Rest.** Exercise, dinner, family. |
-| **19:00 – 21:00** | **Evening Growth** | **Specialization.** Pre-load Zetech units, tech blogs, or **Mobile Dev**. |
+| **19:00 – 20:30** | **Evening Growth** | **Specialization.** Pre-load Zetech units, tech blogs, or **Mobile Dev**. |
+| **20:30 – 21:00** | **Technical Reading** | **Mindset & Mastery.** (See `reading-plan.md`) |
 
 ---
 

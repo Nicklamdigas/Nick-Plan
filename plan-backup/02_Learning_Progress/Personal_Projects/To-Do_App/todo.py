@@ -2,13 +2,14 @@ tasks = []
 
 def show_list(tasks_list):
     for index,task in enumerate(tasks_list, start=1):
+        #status = "[X]" if task["done"] else"[ ]"
         print(f"{index}. {task}")
 
 def saves_tasks(tasks_list):
         with open('tasks.txt', 'w') as file:
             for task in tasks_list:
                 file.write(f"{task}\n")
-def main ():
+def main():
     with open('tasks.txt', 'r') as file:
         for line in file.readlines():
             tasks.append(line.strip())

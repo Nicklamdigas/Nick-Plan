@@ -1,98 +1,80 @@
-# 🛡️ THE NICK PROTOCOL: Career Transformation & Engineering Manifesto
+# 🛡️ THE NICK-PLAN: A Sovereign Engineering Workspace
 
-> "I am no longer just a coder; I am an **Applied Systems Builder**. I am hardening the **Trunk** of my engineering knowledge so that my **Branches** can reach heights others only dream of." — Nicholas
+> "Theory without practice is dead code. Practice without theory is a crash waiting to happen."
 
----
-
-## 🚀 The Mission
-This repository is the command center for Nicholas (21, 3rd-year Software Engineering student at Zetech University). It documents the transition from a tutorial-dependent "AI prompter" to a **Sovereign Software Engineer** capable of architecting complex, secure, and legally compliant systems.
-
-## 🧠 The Core Philosophy: The Anti-AI-Crutch
-I have shifted my relationship with Artificial Intelligence. AI is no longer a code vending machine; it is a **Senior Peer Programmer**.
-
-1.  **Manual Logic First:** Every algorithm (like CS50P `fuel.py`) is written from scratch in my terminal before any AI review.
-2.  **Line-by-Line Ownership:** If I cannot explain every single line of a commit, that code does not belong in my repository.
-3.  **Error Mastery:** I spend 10-20 minutes with every traceback, understanding the "why" before seeking a solution.
-4.  **Verification Rigor:** All changes are verified through CLI-based testing and strict logical audits.
+This repository is not just a collection of notes; it is a **Structured Engineering Environment** designed to transform Nicholas from a student into a Senior-level Architect. It houses the entire lifecycle of a tech career transformation, from foundational logic hardening (CS50P) to large-scale agricultural system design (Farm OS).
 
 ---
 
-## 🌳 The Universal Engineering Tree (Status: May 11, 2026)
+## 🏗️ Architectural Overview
 
-### 🪵 Phase 1: The Trunk (Universal Foundations)
-*Status: **85% Complete** | Focus: Hardening Logic & Environment*
+The workspace is organized into four logical tiers of mastery, managed under the `/home/lamdigas/Nick/Nick Plan` directory.
 
-*   ✅ **Level 1.1:** Hardware & OS Illusion (Binary/Hex, Kernel vs User Space).
-*   ✅ **Level 1.2:** Python Deep Dive (CS50P Weeks 0-2).
-*   🔄 **Level 1.2.3:** Functions & Exceptions (Week 3 - `fuel.py` Verified).
-*   ✅ **Level 1.3:** Algorithmic Maturity (Stochastic modeling, airport simulations).
-*   🔄 **Level 1.4:** The Engineer's Environment (SSH Keys, CLI-Git, VPS Orchestration).
+### 📁 01: Strategy & Roadmaps (The Brain)
+*   **Master Plan (`plan.md`):** The single source of truth for the 12-week transformation.
+*   **Cloud Fortress (`fortress-master-plan.md`):** High-level strategy for hardware-isolated AI agent ecosystems.
+*   **Roadmaps:** 9 industry-standard PDFs (Python, CS, DSA, Full-Stack, Backend, Linux, DevOps, System Design, AWS).
+*   **Life OS Dashboard:** A custom HTML/JS interface for real-time habit tracking and roadmap visualization.
 
-### ⚙️ Phase 2: Core Systems (Infrastructure)
-*Status: **Planning Phase** | Focus: Networking & Data Persistence*
+### 📁 02: Learning Progress (The Muscle)
+*   **CS50P (Harvard):** Hardened Python logic exercises (Currently at Week 3: Exceptions).
+*   **freeCodeCamp:** Certification projects (Bill Splitter, Movie Ticket Booking, etc.).
+*   **Learning Resources:** Ubuntu dev strategy, Visual Programming plans, and "The 18-Month Python Journey."
+*   **Personal Projects:** CLI To-Do apps, Subnetting tools, and Scrapers.
 
-*   **Goal:** Master the Network Layer (TCP/IP, HTTPS) and Relational Databases (SQL Normalization).
+### 📁 03: Daily Logs & Records (The Memory)
+*   **Dev Journal:** Daily granular logs of technical hurdles and "Aha!" moments.
+*   **Session Records:** AI Peer-Programming checkpoints and structured session plans.
+*   **Checkpoints (001-005):** Verified milestones in the integrated roadmap.
 
-### 🚜 Phase 4: The Flagship (The Farm Management OS)
-*The culmination of the journey—managing a 150-Acre Coffee & Macadamia Enterprise.*
-
----
-
-## 🏗️ Flagship Spotlight: Farm Management OS (150 Acres)
-Architecting a distributed, offline-first system for a commercial Coffee & Macadamia farm in Kenya.
-
-*   **The Tech:** Django (Central Truth) + Flutter/Kotlin (Field App) + SQLite (Local Sync).
-*   **The Challenge:** Offline synchronization on a 150-acre site with intermittent connectivity.
-*   **Compliance:** Fully adhering to the **Kenya Artificial Intelligence Bill 2026**.
-    *   **Explainable AI:** Pest/Disease detection with confidence intervals and audit logs.
-    *   **Human-in-the-loop:** AI suggests; the owner approves. No "Black Box" automation.
+### 📁 04: System Architecture (The Fortress)
+*   **Cloud Fortress Logs:** Deep technical logs of VPS orchestration, Oracle Sniper history, and architectural snapshots.
+*   **Git Mastery:** Identity setup and identity-based push scripts.
 
 ---
 
-## 🏆 Verified Technical Achievements (Feb - May 2026)
+## 🛡️ The Anti-AI-Crutch Protocol (Non-Negotiable)
 
-*   **🛡️ Academic Link v4.0:** Engineered a secure REST API with RSA-4096 encryption and ETag-based differential syncing.
-*   **🧠 Logic Engine:** Built discrete event simulations (Airport Security) and mastered Python Exception handling via CS50P.
-*   **💾 Persistence:** Transitioned from text files to relational databases (SQLite/SQLAlchemy) for academic tracking.
-*   **☁️ Cloud Mastery:** Deployed and managed services on Ubuntu VPS, configured as systemd processes.
+This workspace operates under a strict "Full Manual Mode" for core logic.
 
----
-
-## 📁 Repository Map
-
-```text
-Nick-Plan/
-├── 📄 README.md                # This Manifesto
-├── 📄 life_os_v4.html          # Visual Dashboard (Open in Browser)
-└── 📂 plan-backup/
-    ├── 🗺️ plan.md              # The MASTER ROADMAP (The Syllabus)
-    ├── 📓 dev-journal/         # Daily logs of an engineer's growth
-    ├── 🎓 CS50P/               # Hardened Python logic exercises
-    └── 🚜 Farm-OS/             # Blueprints for the 150-acre management system
-```
+1.  **Manual Logic First:** Write code from scratch for 20-30 minutes before seeking AI review.
+2.  **Explain Every Line:** If it's in the repo, Nick owns the logic 100%. No "copy-paste" allowed.
+3.  **Error-First Debugging:** Spend 10 minutes with every traceback. Understand the "Why."
+4.  **Terminal-First:** Development happens in the Linux CLI. Mastering `grep`, `systemctl`, and `chmod`.
 
 ---
 
-## 🚦 Current Learning Focus
+## 🚜 The Flagship Vision: Farm Management OS (150 Acres)
 
-**Phase (as of May 11, 2026):**
-- **CS50P Week 3:** Mastery of Exceptions and Flow Control.
-- **Git & GitHub:** Mastering CLI-based repo management and SSH authentication.
-- **Architecture:** Preparing for "Project Build" blocks focused on the Farm OS MVP.
+A distributed, offline-first system architected for a commercial Coffee & Macadamia enterprise in Kenya.
+
+*   **Offline-First:** Flutter/Kotlin field app with SQLite local sync for remote farm sectors.
+*   **Distributed Truth:** Django/Postgres central server managing payroll, inventory, and yield.
+*   **Legally Compliant AI:** Fully adhering to the **Kenya AI Bill 2026**.
+    *   **Explainability:** Human-in-the-loop decision support for pest detection.
+    *   **Data Auditability:** 5-year secure logging of all AI-suggested agricultural actions.
 
 ---
 
-## 📅 The Road Ahead
+## 🏆 Current Tactical Status (May 11, 2026)
 
-| Timeline | Milestone | Key Focus |
+*   **Logic Hardening:** CS50P Week 3 (`fuel.py`) - Verified and Polished.
+*   **Git Orchestration:** CLI Mastery (SSH-based push, branch management).
+*   **Infrastructure:** Moving from file-based persistence to Relational Databases (SQLite/Postgres).
+*   **Next Milestone:** Finish CS50P Week 3 and begin Phase 2: Core Infrastructure (Networking & SQL).
+
+---
+
+## 📊 The Sovereign Roadmap
+
+| Phase | Focus | Status |
 | :--- | :--- | :--- |
-| **May 2026** | **Trunk Completion** | Finish CS50P + Master SQL Basics |
-| **June 2026** | **Infrastructure** | Networking + REST API Security Deep-Dive |
-| **July 2026** | **The First Harvest** | Farm OS MVP: Worker Payroll & Sector Mapping |
-| **Aug 2026** | **The Branches** | AI Compliance Integration + Mobile Sync Logic |
+| **Phase 1** | **The Trunk:** Python, DS&A, Linux Mastery | **ACTIVE (85%)** |
+| **Phase 2** | **Infrastructure:** Networking, HTTP, SQL Normalization | *PLANNED* |
+| **Phase 3** | **Architecture:** RESTful APIs, OOP, Security | *PLANNED* |
+| **Phase 4** | **The Branches:** Farm OS Flagship, Mobile, DevOps | *PLANNED* |
 
 ---
 
-> **"Theory without practice is dead code. Practice without theory is a crash waiting to happen."**
->
-> **Last Updated:** May 11, 2026
+> **Repository Repository:** [Nicklamdigas/Nick-Plan](https://github.com/Nicklamdigas/Nick-Plan)
+> **Contact:** lamdigasndungu3901@gmail.com

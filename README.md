@@ -3,7 +3,7 @@
 > A comprehensive 12-week learning roadmap for a Software Engineering student transitioning from "AI prompter" to a confident full-stack web developer.
 
 **Status:** Active Development  
-**Last Updated:** February 26, 2026  
+**Last Updated:** May 11, 2026  
 **Target Graduation:** May 2026
 
 ---
@@ -201,15 +201,15 @@ nano plan-backup/session-records/session-plan.md
 
 ## 🎓 Current Learning Focus
 
-**Phase (as of March 19, 2026):**
-- **CS50P (Week 1):** `bank.py` and `deep.py` completed. Working on `extensions.py`.
-- **freeCodeCamp:** Strings and Variables modules completed. Starting "Numbers".
-- **Environment:** Successfully migrated to Linux (Ubuntu).
+**Phase (as of May 11, 2026):**
+- **CS50P (Week 3):** `fuel.py` COMPLETED. Mastery of `while True`, `try/except`, and `if/elif/else` flow.
+- **Git Mastery:** Level 1.4.1 (SSH Authentication and CLI Orchestration).
+- **Architecture:** Transitioning from "vibe-coding" to "structured engineering."
 
 **Next Steps:**
-- Complete CS50P Week 1 (Conditionals).
-- Begin CS50P Week 2 (Loops).
-- Start implementing CLI Task Manager logic.
+- Finish CS50P Week 3 (Exceptions).
+- Begin CS50P Week 4 (Libraries).
+- Formulate the "Farm OS" Technical Design Document.
 
 ---
 
@@ -238,13 +238,11 @@ This is your personal learning repository. The docs are yours to update:
 
 | Phase | Duration | Focus |
 |-------|----------|-------|
-| **Phase 1** | Weeks 1-2 | Python Fundamentals + Computer Science Basics |
-| **Phase 2** | Weeks 3-4 | Data Structures & Algorithms |
-| **Phase 3** | Weeks 5-6 | Web Development Fundamentals (HTML/CSS/JS) |
-| **Phase 4** | Weeks 7-9 | Full-Stack Integration (Django + React) |
-| **Phase 5** | Weeks 10-12 | Portfolio Projects + Job Prep |
+| **Phase 1** | Weeks 1-4 | The Trunk: Python Hardening + CS Fundamentals (CS50P) |
+| **Phase 2** | Weeks 5-6 | Core Systems: Networks & Databases (SQL Mastery) |
+| **Phase 3** | Weeks 7-12 | The Branches: Farm OS Development + Portfolio |
 
-**Current:** Week 1 of Phase 1 (Feb 24–25, 2026)
+**Current:** Week 3 of Phase 1 (May 11, 2026)
 
 ---
 
